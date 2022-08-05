@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "102039542157",
+    "project_id": "subway-10fda",
+    "storage_bucket": "subway-10fda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102039542157:android:09fe9260d1cdeccc0e45c4",
+        "android_client_info": {
+          "package_name": "com.example.hodu_navigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102039542157-8vv1oerr2qpu53h5tl9npi3brolnndte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCctRl9p8hzfN3RCyiBacg7auBYRl5JjBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102039542157-8vv1oerr2qpu53h5tl9npi3brolnndte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
