@@ -56,10 +56,10 @@ public class Search extends AppCompatActivity {
                 //클릭한 아이템의 문자열을 가져옴
                 String selected_item = (String)adapterView.getAdapter().getItem(position);
 
-                Intent intent1 = new Intent(getApplicationContext(), Input.class);
-                intent1.putExtra("str",selected_item);
+                Intent intent= new Intent(getApplicationContext(), Input.class);
+                intent.putExtra("selected_item",selected_item);
 
-                startActivity(intent1);
+                startActivity(intent);
                 //텍스트뷰에 출력
                 //editSearch.setText(selected_item);
 
