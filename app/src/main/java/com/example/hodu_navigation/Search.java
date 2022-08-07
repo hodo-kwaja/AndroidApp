@@ -63,8 +63,6 @@ public class Search extends AppCompatActivity {
                 //텍스트뷰에 출력
                 //editSearch.setText(selected_item);
 
-
-
            }
         });
 

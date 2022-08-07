@@ -25,7 +25,7 @@
 
         <EditText
             android:id="@+id/Edit1"
-            android:layout_width="272dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -50,11 +50,18 @@
 
         <EditText
             android:id="@+id/Edit2"
-            android:layout_width="272dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="도착역을 입력하세요      "
             android:minHeight="48dp" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="go"
+            android:layout_gravity="right"/>
+
     </LinearLayout>
 
     // 노선도 이미지
