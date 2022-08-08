@@ -113,7 +113,7 @@ public class Input extends AppCompatActivity {
         Button search_button = (Button) findViewById(R.id.button1);
         search_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setDefaultJsonData();
+                //setDefaultJsonData();
                 Intent intent = new Intent(getApplicationContext(), RouteTime.class);
                 startActivity(intent);
             }
@@ -127,7 +127,7 @@ public class Input extends AppCompatActivity {
         this.week = week;
     }
 
-    public String getdeparture() {
+    /*public String getdeparture() {
         return departure_text;
     }
     public String getarrival() {
@@ -138,7 +138,7 @@ public class Input extends AppCompatActivity {
     }
     public String getdeparture() {
         return departure_text;
-    }
+    }*/
 
 
 
