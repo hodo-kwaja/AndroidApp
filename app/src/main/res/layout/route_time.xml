@@ -69,10 +69,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="---분"
+            android:id="@+id/duration"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="15dp"
@@ -82,7 +83,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="경유역 --개"
+            android:id="@+id/numStep"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="15dp"
@@ -98,7 +99,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="환승 --회"
+            android:id="@+id/transferNum"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="15dp"
@@ -115,14 +116,6 @@
             android:layout_marginBottom="15dp"
             android:textColor="#000000"
             android:textSize="12dp" />
-
-        <Button
-            android:id="@+id/jsonparse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="json parse"
-            android:textColor="@color/white" />
 
     </LinearLayout>
 

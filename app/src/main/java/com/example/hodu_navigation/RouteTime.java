@@ -1,11 +1,8 @@
 package com.example.hodu_navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -16,54 +13,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import com.example.hodu_navigation.R;
 
 public class RouteTime extends AppCompatActivity {
 
-    TextView tv;
+    //textview 선언
+    TextView duration_textview;
+    TextView numStep_textview;
+    TextView transferNum_textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.route_time);
 
-        tv = findViewById(R.id.text_view);
-        Button json_button = (Button) findViewById(R.id.jsonparse);
-        json_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //xml 아이디 - textview 지정
+        duration_textview = findViewById(R.id.duration);
+        numStep_textview = findViewById(R.id.numStep);
+        transferNum_textview = findViewById(R.id.transferNum);
+
+
                 AssetManager assetManager = getAssets();
 
                 //assets/ test.json 파일 읽기 위한 InputStream
                 try {
-                    InputStream is = assetManager.open("test1.json");
+                    InputStream is = assetManager.open("test.json");
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader reader = new BufferedReader(isr);
 
@@ -76,37 +51,51 @@ public class RouteTime extends AppCompatActivity {
 
                     String jsonData = buffer.toString();
 
-                    //json 데이터가 []로 시작하는 배열일때..
-                    JSONArray jsonArray = new JSONArray(jsonData);
+                    //json 데이터가 ShortestPath 일 경우
+                    JSONObject jsonObject = new JSONObject(jsonData);
 
-                    String s = "";
+                    JSONArray jsonArray = jsonObject.getJSONArray("ShortestPath");
+
+                    String duration_t = "";
+                    String numStep_t = "";
+                    String transferNum_t = "";
 
                     for (int i = 0; i < jsonArray.length(); i++) {
+
                         JSONObject jo = jsonArray.getJSONObject(i);
 
-                        int duration = jo.getInt("stationCode");
-                       // int transferNum = jo.getInt("transferNum");
-                        int numStep = jo.getInt("lineId");
-                        /*String duration = jo.getString("stationCode");
-                        String transferNum = jo.getString("transferNum");
-                        String numStep = jo.getString("lineId");*/
-                        String stationName = jo.getString("stationName");
+                        //마지막 역의 값을 갖고오는 object
+                        JSONObject jf = jsonArray.getJSONObject(0);
 
-                       JSONObject flag = jo.getJSONObject("transfer");
-                        //int aa = flag.getInt("isTransfer");
-                        Boolean aa = flag.getBoolean("isTransfer");
-                        int bb = flag.getInt("transferDistance");
-                        int cc = flag.getInt("transferTime");
+                        //string 예시
+                        //String stationName = jo.getString("stationName");
 
-                        /*String name = jo.getString("name");
-                        String msg = jo.getString("msg");
-                        JSONObject flag = jo.getJSONObject("flag");
-                        int aa = flag.getInt("aa");
-                        int bb = flag.getInt("bb");*/
+                        JSONObject transfer = jo.getJSONObject("transfer");
 
-                        s += stationName + " " + duration + " : " + numStep +"==>" + aa + "," + bb +","+ cc +"\n";
+                        JSONObject schedule = jf.getJSONObject("schedule");
+                        int duration = schedule.getInt("duration");
+                        int numStep = schedule.getInt("numStep");
+                        int transferNum = schedule.getInt("transferNum");
+
+                        //소요시간
+                        if(duration<60)
+                            duration_t = duration + "분";
+                        else {
+                            int hour = duration / 60;
+                            int minute = duration % 60;
+                            duration_t =  hour + "시간" + minute +"분";
+                        }
+
+                        //경유역 개수
+                        numStep_t = "경유역 " + numStep + "개";
+                        //환승 횟수
+                        transferNum_t = "환승" + transferNum + "회";
+
                     }
-                    tv.setText(s);
+                    //화면에 출력
+                    duration_textview.setText(duration_t);
+                    numStep_textview.setText(numStep_t);
+                    transferNum_textview.setText(transferNum_t);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -114,55 +103,8 @@ public class RouteTime extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-            }
-        });
     }
 }
-
-
-    //public void clickBtn(View view) {
-
-        //json 파일 읽어와서 분석하기
-
-        //assets폴더의 파일을 가져오기 위해
-        //창고관리자(AssetManager) 얻어오기
-
-
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.route_time);
-
-        getJson();
-    }
-
-    public void getJson(){
-
-        try {
-            InputStream inputStream = getAssets().open("test.json");
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line = null;
-
-            while (true){
-                line = reader.readLine();
-
-                Log.d("Json", "line : " + line);
-
-                if(line == null){
-                    break;
-                }
-            }
-            reader.close();
-
-        }catch (Exception e){
-
-        }
-    }
-
-     */
 
 
 
