@@ -1,0 +1,40 @@
+[
+  {
+    "stationName" : "대공원",
+    "stationCode" : "437",
+    "lineId" : "4",
+    "schedule" : {
+      "lineDirection" : 0,
+      "weekType" : "W",
+      "hour" : 10,
+      "minute" : 19,
+      "typeName" : "N",
+      "scheduleName" : "오이도",
+      "congest" : "0.0"
+    },
+    "transfer" : {
+      "isTransfer" : false,
+      "transferDistance" : 0,
+      "transferTime" : 0
+    }
+  },
+  {
+    "stationName" : "경마공원",
+    "stationCode" : "436",
+    "lineId" : "4",
+    "schedule" : {
+      "lineDirection" : "0",
+      "weekType" : "W",
+      "hour" : 10,
+      "minute" : 17,
+      "typeName" : "N",
+      "scheduleName" : "오이도",
+      "congest" : "0.0"
+    },
+    "transfer" : {
+      "isTransfer" : false,
+      "transferDistance" : 0,
+      "transferTime" : 0
+    }
+  }
+]

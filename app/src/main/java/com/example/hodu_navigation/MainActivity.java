@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.main);
-
         // 3초 후 메인화면 사라지고 역 입력 화면 나타나기
         Handler hand = new Handler();
         hand.postDelayed(new Runnable() {

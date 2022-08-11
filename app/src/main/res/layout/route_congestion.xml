@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity" >
 
     // 최단시간, 최소환승, 혼잡도 카테고리
     <LinearLayout
@@ -19,34 +18,41 @@
             android:id="@+id/shortest_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최단시간"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textColor="#000000"
-            android:textSize="20dp" />
+            android:clickable="true"
+            android:text="최단시간"
+            android:textColor="#888888"
+            android:textSize="20dp"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/min_transfer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최소환승"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:text="최소환승"
             android:textColor="#888888"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/congestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="혼잡도"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textColor="#888888"
-            android:textSize="20dp" />
+            android:clickable="true"
+            android:text="혼잡도"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
     //소요시간 텍스트
@@ -104,28 +110,8 @@
             android:layout_marginBottom="15dp"
             android:textColor="#000000"
             android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="15dp"
-            android:textColor="#000000"
-            android:textSize="12dp" />
-
-        <Button
-            android:id="@+id/jsonparse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="json parse"
-            android:textColor="@color/white" />
-
     </LinearLayout>
 
 
 
-    </LinearLayout>
+</LinearLayout>
