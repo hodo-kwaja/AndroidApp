@@ -24,6 +24,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:textColor="#000000"
+            android:textStyle="bold"
             android:textSize="20dp" />
 
         <TextView
@@ -69,11 +70,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <TextView
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/duration"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="15dp"
@@ -81,25 +81,25 @@
             android:textSize="30dp"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/numStep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/numStep"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="15dp"
             android:textColor="#000000"
             android:textSize="12dp" />
+
         <View
-            android:background="#888888"
             android:layout_width="1dp"
             android:layout_height="15dp"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="12dp"
-            />
+            android:layout_marginTop="25dp"
+            android:background="#888888" />
         <TextView
+            android:id="@+id/transferNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/transferNum"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="15dp"
@@ -110,15 +110,33 @@
             android:id="@+id/text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="15dp"
             android:textColor="#000000"
             android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/createTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="텍스트뷰 동적 생성"/>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:background="#FFFFFF"/>
 
 
-    </LinearLayout>
+</LinearLayout>
