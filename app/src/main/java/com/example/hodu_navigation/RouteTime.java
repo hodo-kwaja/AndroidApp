@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import android.view.View;
 
@@ -89,13 +90,13 @@ public class RouteTime extends AppCompatActivity {
                         line = reader.readLine();
                     }
 
+
                     String jsonData = buffer.toString();
 
                     //json 데이터가 ShortestPath 일 경우
                     JSONObject jsonObject = new JSONObject(jsonData);
 
                     JSONArray jsonArray = jsonObject.getJSONArray("ShortestPath");
-
 
 
 
@@ -188,6 +189,7 @@ public class RouteTime extends AppCompatActivity {
     private void createBigView(){
 
         //1. 텍스트뷰 객체생성
+
         TextView textViewNm = new TextView(getApplicationContext());
 
         //2. 텍스트뷰에 들어갈 문자설정
