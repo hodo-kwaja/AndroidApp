@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import android.view.View;
@@ -47,6 +48,7 @@ public class RouteTime extends AppCompatActivity {
     String numStep_t = "";
     String transferNum_t = "";
     String stationName_t = "";
+    String[] staitonName_tt = new String[100];
     String hourminute_t= "";
     String scheduleName_t= "";
     String countStation_t= "";
@@ -54,6 +56,7 @@ public class RouteTime extends AppCompatActivity {
     String TransferTime_t= "";
     int lineId_t = 0;
     int numStep_ = 0;
+    int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +113,11 @@ public class RouteTime extends AppCompatActivity {
                         JSONObject jl = jsonArray.getJSONObject(jsonArray.length()-1);
 
                         //string 예시
+                       // String stationName_jo = jo.getString("stationName");
                         String stationName_jo = jo.getString("stationName");
                         //stationName_t += stationName_jo +"\n";
+
+                        staitonName_tt[i] = stationName_jo;
 
                         String stationName_jl = jl.getString("stationName");
                         //stationName_t = stationName_jl +"\n";
@@ -121,8 +127,8 @@ public class RouteTime extends AppCompatActivity {
                         Boolean isTransfer = transfer_jo.getBoolean("isTransfer");
 
 
-                        if(isTransfer == true){
-                            stationName_t += stationName_jo +"\n";
+                       if(isTransfer == true){
+                           count=i;
                         }
 
                         //출발역 정보
@@ -153,7 +159,7 @@ public class RouteTime extends AppCompatActivity {
                             duration_t =  hour_d + "시간" + minute_d +"분";
                         }
 
-                        numStep_ = numStep;
+                        numStep_ = numStep+2;
                         //경유역 개수
                         numStep_t = "경유역 " + numStep + "개";
                         //환승 횟수
@@ -190,36 +196,46 @@ public class RouteTime extends AppCompatActivity {
 
         //1. 텍스트뷰 객체생성
 
-        TextView textViewNm = new TextView(getApplicationContext());
+        for(int i=0;i<numStep_;i++) {
+            TextView textViewNm = new TextView(getApplicationContext());
 
-        //2. 텍스트뷰에 들어갈 문자설정
-        textViewNm.setText(stationName_t);
-
-        //3. 텍스트뷰 글자크기 설정
-        textViewNm.setTextSize(20);//텍스트 크기
-
-        //4. 텍스트뷰 글자타입 설정
-        textViewNm.setTypeface(null, Typeface.BOLD);
-
-        //5. 텍스트뷰 ID설정
-        textViewNm.setId(0);
-
-        //6. 레이아웃 설정
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
-                ,LinearLayout.LayoutParams.WRAP_CONTENT);
-        param.leftMargin = 30;
-        param.bottomMargin=12;
-        param.topMargin=12;
+            //2. 텍스트뷰에 들어갈 문자설정
+            textViewNm.setText(staitonName_tt[i]);
 
 
-        // 7. 설정한 레이아웃 텍스트뷰에 적용
-        textViewNm.setLayoutParams(param);
+            /*if(i==5){
+                textViewNm.setTextSize(40);//텍스트 크기
+            }*/
+            textViewNm.setTextSize(20);//텍스트 크기
+            //3. 텍스트뷰 글자크기 설정
 
-        //8. 텍스트뷰 백그라운드색상 설정
-        textViewNm.setBackgroundColor(Color.rgb(255,255,255));
+            if(i==count){
+                textViewNm.setTextSize(50);
+            }
 
-        //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
-        listView.addView(textViewNm);
+            //4. 텍스트뷰 글자타입 설정
+            textViewNm.setTypeface(null, Typeface.BOLD);
+
+            //5. 텍스트뷰 ID설정
+            textViewNm.setId(i);
+
+            //6. 레이아웃 설정
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
+                    , LinearLayout.LayoutParams.WRAP_CONTENT);
+            param.leftMargin = 30;
+            param.bottomMargin = 12;
+            param.topMargin = 12;
+
+
+            // 7. 설정한 레이아웃 텍스트뷰에 적용
+            textViewNm.setLayoutParams(param);
+
+            //8. 텍스트뷰 백그라운드색상 설정
+            textViewNm.setBackgroundColor(Color.rgb(255, 255, 255));
+
+            //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
+            listView.addView(textViewNm);
+        }
     }
 
     private void createSmallView(){
@@ -228,7 +244,7 @@ public class RouteTime extends AppCompatActivity {
         TextView textViewNm = new TextView(getApplicationContext());
 
         //2. 텍스트뷰에 들어갈 문자설정
-        textViewNm.setText("경유역");
+        textViewNm.setText(stationName_t);
 
         //3. 텍스트뷰 글자크기 설정
         textViewNm.setTextSize(15);//텍스트 크기

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                Intent i = new Intent(MainActivity.this, CustomListActivity.class); // 2초 뒤 Input 액티비티로 이동
+                Intent i = new Intent(MainActivity.this, Input.class); // 2초 뒤 Input 액티비티로 이동
                 startActivity(i);
                 finish();
             }

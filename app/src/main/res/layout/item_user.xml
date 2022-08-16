@@ -7,10 +7,10 @@
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_alignBaseline="@+id/ivUserIcon"
-        android:layout_toRightOf="@+id/ivUserIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ivUserIcon"
+        android:layout_toRightOf="@+id/ivUserIcon"
         android:paddingLeft="10dp"
         android:paddingRight="6dp"
         android:text="Sarah"
@@ -35,11 +35,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:id="@+id/ivUserIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:src="@drawable/map2" />
 
 </RelativeLayout>
