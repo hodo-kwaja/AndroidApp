@@ -140,10 +140,8 @@ public class RouteTime extends AppCompatActivity {
                            else {
                                int hour_t = transferTime / 60;
                                int minute_t = transferTime % 60;
-                               if(minute_t == 0){
-                                   transferTime_t[i] = hour_t + "분";
-                               }
-                               else transferTime_t[i] = hour_t + "분" + minute_t + "초";
+
+                               transferTime_t[i] = hour_t + "분" + minute_t + "초";
                                Log.d("transfer",transferTime_t[i]);
                            }
                        }
@@ -199,7 +197,9 @@ public class RouteTime extends AppCompatActivity {
 
         for(int i=0;i<numStep_+2;i++) {
             TextView textViewNm = new TextView(getApplicationContext());
+            TextView textViewTransfer = new TextView(getApplicationContext());
             textViewNm.setText(staitonName_tt[i]);
+
 
             if(i==0){ //출발역 텍스트 크기 지정
                 textViewNm.setTextSize(25);
@@ -207,7 +207,6 @@ public class RouteTime extends AppCompatActivity {
             else if(i==count[i]){
                 //환승역 텍스트 크기 지정
                 textViewNm.setTextSize(25);
-                TextView textViewTransfer = new TextView(getApplicationContext());
                 textViewTransfer.setText(transferTime_t[i]);
             }
             else if(i==numStep_+1){
@@ -224,6 +223,7 @@ public class RouteTime extends AppCompatActivity {
 
             //5. 텍스트뷰 ID설정
             textViewNm.setId(i);
+            textViewTransfer.setId(i);
 
             //6. 레이아웃 설정
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
@@ -232,15 +232,24 @@ public class RouteTime extends AppCompatActivity {
             param.bottomMargin = 12;
             param.topMargin = 12;
 
+            LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
+                    , LinearLayout.LayoutParams.WRAP_CONTENT);
+            param1.leftMargin = 30;
+            //param1.bottomMargin = 12;
+            param1.topMargin = 5;
+
 
             // 7. 설정한 레이아웃 텍스트뷰에 적용
             textViewNm.setLayoutParams(param);
+            textViewTransfer.setLayoutParams(param1);
 
             //8. 텍스트뷰 백그라운드색상 설정
             textViewNm.setBackgroundColor(Color.rgb(255, 255, 255));
+            textViewTransfer.setBackgroundColor(Color.rgb(255, 255, 255));
 
             //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
             listView.addView(textViewNm);
+            listView.addView(textViewTransfer);
         }
     }
 
