@@ -214,24 +214,35 @@ public class RouteTime extends AppCompatActivity {
             textViewNm.setText(staitonName_tt[i]);
 
 
+
             if(i==0){ //출발역 텍스트 크기 지정
-                textViewNm.setTextSize(25);
                 textViewTime.setText(hourminute_t[i]);
+                listView.addView(textViewTime);
+                listView.addView(textViewNm);
+                textViewNm.setTextSize(25);
+
             }
             else if(i==count[i]){
                 //환승역 텍스트 크기 지정
                 textViewNm.setTextSize(25);
-                textViewTransfer.setText(transferTime_t[i]);
                 textViewTime.setText(hourminute_t[i]);
+                textViewTransfer.setText(transferTime_t[i]);
+                listView.addView(textViewTime);
+                listView.addView(textViewNm);
+                listView.addView(textViewTransfer);
+
             }
             else if(i==numStep_+1){
                 //도착역 텍스트 크기 지정
-                textViewNm.setTextSize(25);
                 textViewTime.setText(hourminute_t[i]);
+                textViewNm.setTextSize(25);
+                listView.addView(textViewTime);
+                listView.addView(textViewNm);
             }
             else{
                 //경유역 텍스트 크기 지정
                 textViewNm.setTextSize(15);
+                listView.addView(textViewNm);
             }
 
             //4. 텍스트뷰 글자타입 설정
@@ -262,8 +273,6 @@ public class RouteTime extends AppCompatActivity {
 
             // 7. 설정한 레이아웃 텍스트뷰에 적용
             textViewNm.setLayoutParams(param);
-            textViewTransfer.setLayoutParams(param1);
-            textViewTime.setLayoutParams(param3);
 
             //8. 텍스트뷰 백그라운드색상 설정
             textViewNm.setBackgroundColor(Color.rgb(0, 255, 255));
@@ -271,9 +280,7 @@ public class RouteTime extends AppCompatActivity {
             textViewTime.setBackgroundColor(Color.rgb(255, 255, 0));
 
             //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
-            listView.addView(textViewNm);
-            listView.addView(textViewTransfer);
-            listView.addView(textViewTime);
+
         }
     }
 
