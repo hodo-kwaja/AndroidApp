@@ -48,15 +48,15 @@ public class RouteTime extends AppCompatActivity {
     String numStep_t = "";
     String transferNum_t = "";
     String stationName_t = "";
-    String[] staitonName_tt = new String[100];
     String hourminute_t= "";
     String scheduleName_t= "";
     String countStation_t= "";
     String congest_t= "";
-    String TransferTime_t= "";
     int lineId_t = 0;
     int numStep_ = 0;
-    int count=0;
+    String[] transferTime_t= new String[100];
+    String[] staitonName_tt = new String[100];
+    int[] count= new int[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +70,15 @@ public class RouteTime extends AppCompatActivity {
         duration_textview = findViewById(R.id.duration);
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
-        /*stationName_textview = findViewById(R.id.stationName);
-        hourminute_textview = findViewById(R.id.hourminute);
+
+        /*hourminute_textview = findViewById(R.id.hourminute);
+        stationName_textview = findViewById(R.id.stationName);
         scheduleName_textview = findViewById(R.id.scheduleName);
         countStation_textview = findViewById(R.id.countStation);
         congest_textview = findViewById(R.id.congest);
         TransferTime_textview = findViewById(R.id.TransferTime);
         lineId_textview = findViewById(R.id.lineId);
-*/
+        */
         AssetManager assetManager = getAssets();
 
                 //assets/ test.json 파일 읽기 위한 InputStream
@@ -101,56 +102,60 @@ public class RouteTime extends AppCompatActivity {
 
                     JSONArray jsonArray = jsonObject.getJSONArray("ShortestPath");
 
-
-
                     for (int i = 0; i < jsonArray.length(); i++) {
 
-                        JSONObject jo = jsonArray.getJSONObject(i);
-
-                        //마지막 역의 값을 갖고오는 object (도착역)
-                        JSONObject jf = jsonArray.getJSONObject(0);
-                        //첫번째 역의 값을 갖고오는 object (출발역)
-                        JSONObject jl = jsonArray.getJSONObject(jsonArray.length()-1);
-
-                        //string 예시
-                       // String stationName_jo = jo.getString("stationName");
-                        String stationName_jo = jo.getString("stationName");
-                        //stationName_t += stationName_jo +"\n";
-
-                        staitonName_tt[i] = stationName_jo;
-
-                        String stationName_jl = jl.getString("stationName");
-                        //stationName_t = stationName_jl +"\n";
-
-                        JSONObject transfer_jo = jo.getJSONObject("transfer");
-
-                        Boolean isTransfer = transfer_jo.getBoolean("isTransfer");
+                        //전체 역의 값을 갖고오는 object (전체, all)
+                        JSONObject a = jsonArray.getJSONObject(i);
+                        //첫번째 역의 값을 갖고오는 object (출발역, first)
+                        JSONObject f = jsonArray.getJSONObject(0);
+                        //마지막 역의 값을 갖고오는 object (도착역, last)
+                        JSONObject l = jsonArray.getJSONObject(jsonArray.length()-1);
 
 
-                       if(isTransfer == true){
-                           count=i;
-                        }
+                        String stationName_a = a.getString("stationName");
+                        String stationName_f = f.getString("stationName");
+                        String stationName_l = l.getString("stationName");
 
-                        //출발역 정보
+                        JSONObject schedule_a = a.getJSONObject("schedule");
+                        JSONObject schedule_f = f.getJSONObject("schedule");
+                        JSONObject schedule_l = l.getJSONObject("schedule");
 
-                        int lindId = jl.getInt("lineId"); //호선
-                        String stationName = jl.getString("stationName"); //출발역 이름
+                        JSONObject transfer_a = a.getJSONObject("transfer");
+                        JSONObject transfer_f = f.getJSONObject("transfer");
+                        JSONObject transfer_l = l.getJSONObject("transfer");
 
-                        JSONObject schedule_jl = jl.getJSONObject("schedule");
-                        int hour = schedule_jl.getInt("hour");  //출발역 시
-                        int minute = schedule_jl.getInt("minute"); //출발역 분
-                        String scheduleName = schedule_jl.getString("scheduleName"); //방면
+                        //전체역 담는 배열
+                        staitonName_tt[i] = stationName_a;
 
-                      /*  hourminute_t = hour +":"+minute;
-                        lineId_t = lindId;*/
+                        //전체역 환승 여부 체크
+                        Boolean isTransfer = transfer_a.getBoolean("isTransfer");
+                        int transferTime = transfer_a.getInt("transferTime");
+
+                        //환승이 true 인 역의 숫자 저장
+                       if(isTransfer == true) {
+                           count[i] = i;
+
+                           if (transferTime < 60)
+                               transferTime_t[i] = transferTime + "초";
+                           else {
+                               int hour_t = transferTime / 60;
+                               int minute_t = transferTime % 60;
+                               if(minute_t == 0){
+                                   transferTime_t[i] = hour_t + "분";
+                               }
+                               else transferTime_t[i] = hour_t + "분" + minute_t + "초";
+                               Log.d("transfer",transferTime_t[i]);
+                           }
+                       }
+
 
                         //상단 정보
-                        JSONObject schedule_jf = jf.getJSONObject("schedule");
-                        int duration = schedule_jf.getInt("duration");  //소요시간
-                        int numStep = schedule_jf.getInt("numStep");  //경유역
-                        int transferNum = schedule_jf.getInt("transferNum");  //환승횟수
+                        int duration = schedule_l.getInt("duration");  //소요시간
+                        int numStep = schedule_l.getInt("numStep");  //경유역
+                        int transferNum = transfer_l.getInt("transferNum");  //환승횟수
 
-                        //소요시간
+
+                        //소요시간(시간,분 으로 변경)
                         if(duration<60)
                             duration_t = duration + "분";
                         else {
@@ -159,7 +164,7 @@ public class RouteTime extends AppCompatActivity {
                             duration_t =  hour_d + "시간" + minute_d +"분";
                         }
 
-                        numStep_ = numStep+2;
+                        numStep_ = numStep;
                         //경유역 개수
                         numStep_t = "경유역 " + numStep + "개";
                         //환승 횟수
@@ -168,9 +173,9 @@ public class RouteTime extends AppCompatActivity {
                     }
                     createBigView();
 
-                    for(int i=0;i<numStep_;i++) {
+                    /*for(int i=0;i<numStep_;i++) {
                         createSmallView();
-                    }
+                    }*/
 
                     //화면에 출력
                     //소요시간, 경유역, 환승횟수
@@ -182,8 +187,6 @@ public class RouteTime extends AppCompatActivity {
                     hourminute_textview.setText(hourminute_t);
                     transferNum_textview.setText(lineId_t);*/
 
-                    //출발역 정보
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -194,23 +197,26 @@ public class RouteTime extends AppCompatActivity {
 
     private void createBigView(){
 
-        //1. 텍스트뷰 객체생성
-
-        for(int i=0;i<numStep_;i++) {
+        for(int i=0;i<numStep_+2;i++) {
             TextView textViewNm = new TextView(getApplicationContext());
-
-            //2. 텍스트뷰에 들어갈 문자설정
             textViewNm.setText(staitonName_tt[i]);
 
-
-            /*if(i==5){
-                textViewNm.setTextSize(40);//텍스트 크기
-            }*/
-            textViewNm.setTextSize(20);//텍스트 크기
-            //3. 텍스트뷰 글자크기 설정
-
-            if(i==count){
-                textViewNm.setTextSize(50);
+            if(i==0){ //출발역 텍스트 크기 지정
+                textViewNm.setTextSize(25);
+            }
+            else if(i==count[i]){
+                //환승역 텍스트 크기 지정
+                textViewNm.setTextSize(25);
+                TextView textViewTransfer = new TextView(getApplicationContext());
+                textViewTransfer.setText(transferTime_t[i]);
+            }
+            else if(i==numStep_+1){
+                //도착역 텍스트 크기 지정
+                textViewNm.setTextSize(25);
+            }
+            else{
+                //경유역 텍스트 크기 지정
+                textViewNm.setTextSize(15);
             }
 
             //4. 텍스트뷰 글자타입 설정
@@ -238,7 +244,7 @@ public class RouteTime extends AppCompatActivity {
         }
     }
 
-    private void createSmallView(){
+    /*private void createSmallView(){
 
         //1. 텍스트뷰 객체생성
         TextView textViewNm = new TextView(getApplicationContext());
@@ -271,7 +277,7 @@ public class RouteTime extends AppCompatActivity {
 
         //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
         listView.addView(textViewNm);
-    }
+    }*/
 
 }
 
