@@ -130,43 +130,48 @@ public class RouteTime extends AppCompatActivity {
                         //전체역 환승 여부 체크
                         Boolean isTransfer = transfer_a.getBoolean("isTransfer");
                         int transferTime = transfer_a.getInt("transferTime");
+                        int transferNum = transfer_a.getInt("transferNum");
 
                         //환승이 true 인 역의 숫자 저장
                        if(isTransfer == true) {
                            count[i] = i;
+                            if(transferNum == 0 && transferTime != 0) {
+                                if (transferTime < 60)
+                                    transferTime_t[i] = transferTime + "초";
+                                else {
+                                    int minute_t = transferTime / 60;
+                                    int second_t = transferTime % 60;
 
-                           if (transferTime < 60)
-                               transferTime_t[i] = transferTime + "초";
-                           else {
-                               int hour_t = transferTime / 60;
-                               int minute_t = transferTime % 60;
-
-                               transferTime_t[i] = hour_t + "분" + minute_t + "초";
-                               Log.d("transfer",transferTime_t[i]);
-                           }
+                                    if (second_t == 0) {
+                                        transferTime_t[i] = minute_t + "분";
+                                    }
+                                    transferTime_t[i] = minute_t + "분" + second_t + "초";
+                                    Log.d("transfer", transferTime_t[i]);
+                                }
+                            }
                        }
 
 
                         //상단 정보
-                        int duration = schedule_l.getInt("duration");  //소요시간
-                        int numStep = schedule_l.getInt("numStep");  //경유역
-                        int transferNum = transfer_l.getInt("transferNum");  //환승횟수
+                        int duration_l = schedule_l.getInt("duration");  //소요시간
+                        int numStep_l = schedule_l.getInt("numStep");  //경유역
+                        int transferNum_l = transfer_l.getInt("transferNum");  //환승횟수
 
 
                         //소요시간(시간,분 으로 변경)
-                        if(duration<60)
-                            duration_t = duration + "분";
+                        if(duration_l<60)
+                            duration_t = duration_l + "분";
                         else {
-                            int hour_d = duration / 60;
-                            int minute_d = duration % 60;
+                            int hour_d = duration_l / 60;
+                            int minute_d = duration_l % 60;
                             duration_t =  hour_d + "시간" + minute_d +"분";
                         }
 
-                        numStep_ = numStep;
+                        numStep_ = numStep_l;
                         //경유역 개수
-                        numStep_t = "경유역 " + numStep + "개";
+                        numStep_t = "경유역 " + numStep_l + "개";
                         //환승 횟수
-                        transferNum_t = "환승" + transferNum + "회";
+                        transferNum_t = "환승" + transferNum_l + "회";
 
                     }
                     createBigView();
