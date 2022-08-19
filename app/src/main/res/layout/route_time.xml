@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity"
+    android:includeFontPadding="false"
     >
 
     // 최단시간, 최소환승, 혼잡도 카테고리
