@@ -57,7 +57,8 @@ public class RouteTime extends AppCompatActivity {
     String[] hourminute_t = new String[100];
     String[] transferTime_t = new String[100];
     String[] staitonName_tt = new String[100];
-    int[] count= new int[100];
+    int[] countf= new int[100];
+    int[] countl= new int[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class RouteTime extends AppCompatActivity {
 
                 //assets/ test.json 파일 읽기 위한 InputStream
                 try {
-                    InputStream is = assetManager.open("test.json");
+                    InputStream is = assetManager.open("test1.json");
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader reader = new BufferedReader(isr);
 
@@ -141,8 +142,9 @@ public class RouteTime extends AppCompatActivity {
 
                         //환승이 true 인 역의 숫자 저장
                        if(isTransfer == true) {
-                           count[i] = i;
-                            if(transferNum == 0 && transferTime != 0) {
+                           countl[i] = i;
+                            if(transferNum == 0 && transferTime != 0||transferNum == 1 && transferTime != 0||transferNum == 2 && transferTime != 0||transferNum == 3 && transferTime != 0) {
+                                countf[i] = i;
                                 if (transferTime < 60)
                                     transferTime_t[i] = transferTime + "초";
                                 else {
@@ -164,6 +166,15 @@ public class RouteTime extends AppCompatActivity {
                         int numStep_l = schedule_l.getInt("numStep");  //경유역
                         int transferNum_l = transfer_l.getInt("transferNum");  //환승횟수
 
+                        if(transferNum_l==1){
+                            numStep_ = numStep_l+2;
+                        }
+                        else if(transferNum_l==2){
+                            numStep_ = numStep_l+3;
+                        }
+                        else if(transferNum_l==3){
+                            numStep_=numStep_l+4;
+                        }
 
                         //소요시간(시간,분 으로 변경)
                         if(duration_l<60)
@@ -174,7 +185,6 @@ public class RouteTime extends AppCompatActivity {
                             duration_t =  hour_d + "시간" + minute_d +"분";
                         }
 
-                        numStep_ = numStep_l;
                         //경유역 개수
                         numStep_t = "경유역 " + numStep_l + "개";
                         //환승 횟수
@@ -207,7 +217,7 @@ public class RouteTime extends AppCompatActivity {
 
     private void createBigView(){
 
-        for(int i=0;i<numStep_+2;i++) {
+        for(int i=0;i<numStep_;i++) {
             TextView textViewNm = new TextView(getApplicationContext());
             TextView textViewTime= new TextView(getApplicationContext());
             TextView textViewTransfer = new TextView(getApplicationContext());
@@ -222,17 +232,23 @@ public class RouteTime extends AppCompatActivity {
                 textViewNm.setTextSize(25);
 
             }
-            else if(i==count[i]){
-                //환승역 텍스트 크기 지정
+            else if(i==countf[i]){
+                //환승역(첫번째) 텍스트 크기 지정
                 textViewNm.setTextSize(25);
                 textViewTime.setText(hourminute_t[i]);
                 textViewTransfer.setText(transferTime_t[i]);
                 listView.addView(textViewTime);
                 listView.addView(textViewNm);
                 listView.addView(textViewTransfer);
-
             }
-            else if(i==numStep_+1){
+            else if(i==countl[i]){
+                //환승역(두번째) 텍스트 크기 지정
+                textViewNm.setTextSize(25);
+                textViewTime.setText(hourminute_t[i]);
+                listView.addView(textViewTime);
+                listView.addView(textViewNm);
+            }
+            else if(i==numStep_-1){
                 //도착역 텍스트 크기 지정
                 textViewTime.setText(hourminute_t[i]);
                 textViewNm.setTextSize(25);
@@ -275,9 +291,9 @@ public class RouteTime extends AppCompatActivity {
             textViewNm.setLayoutParams(param);
 
             //8. 텍스트뷰 백그라운드색상 설정
-            textViewNm.setBackgroundColor(Color.rgb(0, 255, 255));
-            textViewTransfer.setBackgroundColor(Color.rgb(255, 0, 255));
-            textViewTime.setBackgroundColor(Color.rgb(255, 255, 0));
+            textViewNm.setBackgroundColor(Color.rgb(255, 255, 255));
+            textViewTransfer.setBackgroundColor(Color.rgb(255, 255, 255));
+            textViewTime.setBackgroundColor(Color.rgb(255, 255, 255));
 
             //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
 

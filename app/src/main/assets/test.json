@@ -104,7 +104,7 @@
         "numStep": 4
       },
       "transfer": {
-        "transferNum": 0,
+        "transferNum": 1,
         "isTransfer": true,
         "transferDistance": 111,
         "transferTime": 120
@@ -123,7 +123,7 @@
         "scheduleName": "오이도",
         "congestScore": 0,
         "duration": 15,
-        "numStep": 5
+        "numStep": 4
       },
       "transfer": {
         "transferNum": 1,
