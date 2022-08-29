@@ -1,9 +1,14 @@
 package com.example.hodu_navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -16,6 +21,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import android.view.View;
 
@@ -29,6 +39,14 @@ import android.widget.Button;
 
 public class RouteTime extends AppCompatActivity {
 
+    //뒤로가기 버튼 누르면 Input 액티비티로 이동
+    @Override public void onBackPressed() {
+
+        super.onBackPressed();
+
+        startActivity(new Intent(getApplicationContext(),Input.class));
+
+    }
     //textview 선언
     TextView duration_textview; //소요시간
     TextView numStep_textview;  //경유역
@@ -68,6 +86,26 @@ public class RouteTime extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.route_time);
 
+        /////////////////////////////////////////////////////
+        //최소환승 버튼 클릭시 화면 전환
+        TextView min_transfer=(TextView) findViewById(R.id.min_transfer);
+        min_transfer.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RouteTransfer.class);
+                startActivity(intent);
+            }
+        });
+
+        //혼잡도 버튼 클릭시 화면 전환
+        TextView congestion=(TextView) findViewById(R.id.congestion);
+        congestion.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RouteCongest.class);
+                startActivity(intent);
+            }
+        });
+        //////////////////////////////////////////////////////////////////
+
         listView = findViewById(R.id. listView);
 
         //xml 아이디 - textview 지정
@@ -87,8 +125,8 @@ public class RouteTime extends AppCompatActivity {
 
                 //assets/ test.json 파일 읽기 위한 InputStream
                 try {
-                    InputStream is = assetManager.open("test.json"); //환승 1회
-                    //InputStream is = assetManager.open("test1.json"); //환승 2회
+                    //InputStream is = assetManager.open("test.json"); //환승 1회
+                    InputStream is = assetManager.open("test1.json"); //환승 2회
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader reader = new BufferedReader(isr);
 
@@ -233,7 +271,10 @@ public class RouteTime extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+
     }
+
+    @SuppressLint("ResourceType")
 
     private void createBigView(){
 
@@ -247,7 +288,8 @@ public class RouteTime extends AppCompatActivity {
             textViewNm.setText(staitonName_tt[i]);
 
 
-            if(i==0){ //출발역 텍스트 크기 지정
+
+            if(i==0){
                 textViewTime.setText(hourminute_t[i]);
                 textViewscheduleName.setText(scheduleName_t[i]);
                 textViewlineId.setText(lineId_t[i]);
@@ -257,21 +299,24 @@ public class RouteTime extends AppCompatActivity {
                 listView.addView(textViewlineId);
                 listView.addView(textViewNm);
                 listView.addView(textViewscheduleName);
-                textViewNm.setTextSize(25);
+
+                textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
+                textViewNm.setTextSize(23); //출발역 텍스트 크기 지정
 
             }
             else if(i==countf[i]){
-                //환승역(첫번째) 텍스트 크기 지정
-                textViewNm.setTextSize(25);
                 textViewTime.setText(hourminute_t[i]);
                 textViewTransfer.setText(transferTime_t[i]);
                 listView.addView(textViewTime);
                 listView.addView(textViewNm);
                 listView.addView(textViewTransfer);
+
+                textViewNm.setTextSize(23);//환승역(첫번째) 텍스트 크기 지정
+                textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
+
             }
             else if(i==countl[i]){
                 //환승역(두번째) 텍스트 크기 지정
-                textViewNm.setTextSize(25);
                 textViewTime.setText(hourminute_t[i]);
                 textViewscheduleName.setText(scheduleName_t[i]);
                 textViewlineId.setText(lineId_t[i]);
@@ -279,13 +324,18 @@ public class RouteTime extends AppCompatActivity {
                 listView.addView(textViewlineId);
                 listView.addView(textViewNm);
                 listView.addView(textViewscheduleName);
+
+                textViewNm.setTextSize(23);
+                textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
             }
             else if(i==numStep_-1){
                 //도착역 텍스트 크기 지정
                 textViewTime.setText(hourminute_t[i]);
-                textViewNm.setTextSize(25);
                 listView.addView(textViewTime);
                 listView.addView(textViewNm);
+                textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
+                textViewNm.setTextSize(23);
+
             }
             else{
                 //경유역 텍스트 크기 지정
@@ -297,6 +347,7 @@ public class RouteTime extends AppCompatActivity {
 
             //4. 텍스트뷰 글자타입 설정
             textViewNm.setTypeface(null, Typeface.BOLD);
+            textViewNm.setTextColor(Color.rgb(0, 0, 0));
 
             //5. 텍스트뷰 ID설정
             textViewNm.setId(i);
@@ -305,32 +356,60 @@ public class RouteTime extends AppCompatActivity {
             textViewscheduleName.setId(i);
             textViewlineId.setId(i);
 
+
             //6. 레이아웃 설정
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param.leftMargin = 30;
-            param.bottomMargin = 12;
+            param.leftMargin = 300; //출발,도착역
+            param.bottomMargin = 15;
             param.topMargin = 12;
 
             LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param1.leftMargin = 30;
-            //param1.bottomMargin = 12;
+            param1.leftMargin =70; //열차시간
             param1.topMargin = 5;
+            param1.bottomMargin=-80;
+
+            LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
+                    , LinearLayout.LayoutParams.WRAP_CONTENT);
+            param2.leftMargin = 230; //환승역
+            param2.bottomMargin = 80;
+            param2.topMargin = 40;
 
             LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param3.bottomMargin = 12;
-            param3.topMargin = 5;
+            param3.leftMargin = 250; //호선
+            param3.bottomMargin = -80;
+            param3.topMargin = 20;
+
+            LinearLayout.LayoutParams param4 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
+                    , LinearLayout.LayoutParams.WRAP_CONTENT);
+            param4.leftMargin = 500; //방면
+            param4.bottomMargin = 0;
+            param4.topMargin = -80;
+
+            LinearLayout.LayoutParams param5 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
+                    , LinearLayout.LayoutParams.WRAP_CONTENT);
+            param5.leftMargin = 180; //혼잡도
+            param5.bottomMargin = -80;
+            param5.topMargin = 20;
+            param5.width=30;
+
 
             // 7. 설정한 레이아웃 텍스트뷰에 적용
             textViewNm.setLayoutParams(param);
+            textViewTime.setLayoutParams(param1);
+            textViewTransfer.setLayoutParams(param2);
+            textViewlineId.setLayoutParams(param3);
+            textViewscheduleName.setLayoutParams(param4);
+            textViewcongestScore.setLayoutParams(param5);
 
             //8. 텍스트뷰 백그라운드색상 설정
             textViewNm.setBackgroundColor(Color.rgb(255, 255, 255));
             textViewTransfer.setBackgroundColor(Color.rgb(255, 255, 255));
             textViewTime.setBackgroundColor(Color.rgb(255, 255, 255));
             textViewscheduleName.setBackgroundColor(Color.rgb(255, 255, 255));
+
 
             //혼잡도
             if(congestScore_t[i].equals("3")) {
@@ -350,13 +429,15 @@ public class RouteTime extends AppCompatActivity {
                 textViewcongestScore.setTextColor(Color.YELLOW);
             }*/
 
+
             if(lineId_t[i].equals("1")) {
                 textViewlineId.setTextColor(Color.rgb(255,255,255));
                 textViewlineId.setBackgroundColor(Color.rgb(13,54,146));
             }
             else if(lineId_t[i].equals("2")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
-                textViewlineId.setBackgroundColor(Color.rgb(51,162,61));
+                //textViewlineId.setBackgroundColor(Color.rgb(51,162,61));
+                textViewlineId.setBackgroundResource(R.drawable.shape);
             }
             else if(lineId_t[i].equals("3")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
@@ -442,14 +523,6 @@ public class RouteTime extends AppCompatActivity {
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(54,129,183));
             }
-
-
-
-
-
-
-
-
 
             //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
 

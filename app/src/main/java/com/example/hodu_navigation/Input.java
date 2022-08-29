@@ -1,6 +1,7 @@
 package com.example.hodu_navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,7 +87,7 @@ public class Input extends AppCompatActivity {
         });
 
         //검색 버튼 클릭시 액티비티 전환
-        Button search_button=(Button)findViewById(R.id.button1);
+        ImageButton search_button=(ImageButton) findViewById(R.id.button1);
         search_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
@@ -147,4 +149,12 @@ public class Input extends AppCompatActivity {
 
     }
 
+    @Override public void onBackPressed() {
+
+        super.onBackPressed();
+
+        ActivityCompat.finishAffinity(this); // 액티비티를 종료하고
+        System.exit(0); // 프로세스를 종료
+
+    }
 }

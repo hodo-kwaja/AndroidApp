@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.hodu_navigation.R;
 public class RouteCongest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,12 @@ public class RouteCongest extends AppCompatActivity {
             }
         });
 
+    }
+    @Override public void onBackPressed() {
 
+        super.onBackPressed();
 
+        startActivity(new Intent(getApplicationContext(),Input.class));
 
     }
 }

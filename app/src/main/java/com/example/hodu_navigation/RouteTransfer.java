@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class RouteTransfer extends AppCompatActivity {
 
     @Override
@@ -31,7 +32,13 @@ public class RouteTransfer extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    @Override public void onBackPressed() {
+
+        super.onBackPressed();
+
+        startActivity(new Intent(getApplicationContext(),Input.class));
 
     }
 }

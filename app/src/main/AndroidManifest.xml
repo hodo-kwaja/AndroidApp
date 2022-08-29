@@ -27,8 +27,7 @@
         <activity android:name=".Input"></activity>
         <activity android:name=".Search"></activity>
         <activity android:name=".RouteTime"></activity>
-        <activity android:name=".CustomListActivity"></activity>
-        <activity android:name=".SearchAdapter"
+              <activity android:name=".SearchAdapter"
             tools:ignore="Instantiatable"></activity>
         <activity android:name=".RouteCongest"></activity>
         <activity android:name=".RouteTransfer"></activity>

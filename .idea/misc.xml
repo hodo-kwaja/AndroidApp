@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/drawable-v21/circle.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/drawable/circle.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/drawable/colors.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/drawable/shape.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/layout/activity_main02.xml" value="0.16510416666666666" />
         <entry key="..\:/Users/athen/AndroidStudioProjects/hodu_navigation/app/src/main/res/layout/activity_main2.xml" value="0.16510416666666666" />

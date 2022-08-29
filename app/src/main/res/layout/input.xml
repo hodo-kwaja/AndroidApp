@@ -55,12 +55,12 @@
             android:layout_marginLeft="10dp"
             android:hint="도착역을 입력하세요      "
             android:minHeight="48dp" />
-        <Button
+        <ImageButton
             android:id="@+id/button1"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:text="go"
-            android:layout_gravity="right"/>
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@android:drawable/ic_menu_search" />
 
     </LinearLayout>
 
