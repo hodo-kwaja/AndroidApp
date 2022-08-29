@@ -380,7 +380,9 @@ public class RouteTime extends AppCompatActivity {
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
             param3.leftMargin = 250; //호선
             param3.bottomMargin = -80;
-            param3.topMargin = 20;
+            param3.topMargin = 40;
+            param3.width=80;
+            param3.height=80;
 
             LinearLayout.LayoutParams param4 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
