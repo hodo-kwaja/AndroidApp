@@ -207,9 +207,11 @@ public class RouteTime extends AppCompatActivity {
                                     int second_t = transferTime % 60;
 
                                     if (second_t == 0) {
-                                        transferTime_t[i] = minute_t + "분";
+                                        transferTime_t[i] = "도보 "+ minute_t + "분";
                                     }
-                                    transferTime_t[i] = minute_t + "분" + second_t + "초";
+                                    else {
+                                        transferTime_t[i] = "도보 "+minute_t + "분" + second_t + "초";
+                                    }
                                     Log.d("transfer", transferTime_t[i]);
                                 }
                             }
@@ -289,13 +291,15 @@ public class RouteTime extends AppCompatActivity {
 
 
             if(i==0){
+                textViewlineId.setText(lineId_t[i]);
                 textViewTime.setText(hourminute_t[i]);
                 textViewscheduleName.setText(scheduleName_t[i]);
-                textViewlineId.setText(lineId_t[i]);
+                textViewlineId.setGravity(Gravity.CENTER);
+                textViewlineId.setTypeface(null, Typeface.BOLD);
                 textViewcongestScore.setText(congestScore_t[i]);
+                listView.addView(textViewlineId);
                 listView.addView(textViewTime);
                 listView.addView(textViewcongestScore);
-                listView.addView(textViewlineId);
                 listView.addView(textViewNm);
                 listView.addView(textViewscheduleName);
 
@@ -316,11 +320,13 @@ public class RouteTime extends AppCompatActivity {
             }
             else if(i==countl[i]){
                 //환승역(두번째) 텍스트 크기 지정
+                textViewlineId.setText(lineId_t[i]);
                 textViewTime.setText(hourminute_t[i]);
                 textViewscheduleName.setText(scheduleName_t[i]);
-                textViewlineId.setText(lineId_t[i]);
-                listView.addView(textViewTime);
+                textViewlineId.setGravity(Gravity.CENTER);
+                textViewlineId.setTypeface(null, Typeface.BOLD);
                 listView.addView(textViewlineId);
+                listView.addView(textViewTime);
                 listView.addView(textViewNm);
                 listView.addView(textViewscheduleName);
 
@@ -347,6 +353,9 @@ public class RouteTime extends AppCompatActivity {
             //4. 텍스트뷰 글자타입 설정
             textViewNm.setTypeface(null, Typeface.BOLD);
             textViewNm.setTextColor(Color.rgb(0, 0, 0));
+            textViewcongestScore.setTextSize(10);
+            textViewTransfer.setTypeface(null, Typeface.BOLD);
+            textViewTransfer.setTextColor(Color.GRAY);
 
             //5. 텍스트뷰 ID설정
             textViewNm.setId(i);
@@ -359,43 +368,44 @@ public class RouteTime extends AppCompatActivity {
             //6. 레이아웃 설정
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param.leftMargin = 300; //출발,도착역
-            param.bottomMargin = 15;
-            param.topMargin = 30;
+            param.leftMargin = 320; //출발,도착역
+            param.bottomMargin = 100;
+            param.topMargin = -65;
 
             LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param1.leftMargin =130; //열차시간
-            param1.topMargin = 5;
-            param1.bottomMargin=-80;
+            param1.leftMargin =150; //열차시간
+            param1.topMargin = -55;
+            param1.bottomMargin= 0;
 
             LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param2.leftMargin = 230; //환승역
-            param2.bottomMargin = 80;
-            param2.topMargin = 40;
+            param2.leftMargin = 320; //환승시간
+            param2.bottomMargin = 70;
+            param2.topMargin = -20;
 
             LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param3.leftMargin = 70; //호선
-            param3.bottomMargin = -80;
-            param3.topMargin = 20;
-            param3.width=45;
-            param3.height=45;
+            param3.leftMargin = 40; //호선
+            //param3.bottomMargin = 10;
+            //param3.topMargin = -60;
+            param3.width=80;
+            param3.height=80;
 
             LinearLayout.LayoutParams param4 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param4.leftMargin = 300; //방면
-            param4.bottomMargin = 10;
-            param4.topMargin = 0;
+            param4.leftMargin = 320; //방면
+            param4.bottomMargin = 90;
+            param4.topMargin = -80;
 
             LinearLayout.LayoutParams param5 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param5.leftMargin = 220; //혼잡도
-            param5.bottomMargin = -70;
-            param5.topMargin = 20;
+            param5.leftMargin = 260; //혼잡도
+            //param5.bottomMargin = -30;
+            param5.topMargin = -45;
             param5.width=40;
             param5.height=40;
+
 
 
 
@@ -410,9 +420,9 @@ public class RouteTime extends AppCompatActivity {
             //8. 텍스트뷰 백그라운드색상 설정
             textViewNm.setBackgroundColor(Color.rgb(255, 255, 255));
             textViewTransfer.setBackgroundColor(Color.rgb(255, 255, 255));
-            textViewTime.setBackgroundColor(Color.rgb(0, 255, 255));
+            textViewTime.setBackgroundColor(Color.rgb(255, 255, 255));
             textViewscheduleName.setBackgroundColor(Color.rgb(255, 255, 255));
-            textViewlineId.setBackgroundColor(Color.rgb(255, 0, 255));
+            textViewlineId.setBackgroundColor(Color.rgb(255, 255, 255));
             //혼잡도
             if(congestScore_t[i].equals("3")) {
                 textViewcongestScore.setBackgroundColor(Color.RED);
