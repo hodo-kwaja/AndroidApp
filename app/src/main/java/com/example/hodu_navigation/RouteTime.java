@@ -288,7 +288,6 @@ public class RouteTime extends AppCompatActivity {
             textViewNm.setText(staitonName_tt[i]);
 
 
-
             if(i==0){
                 textViewTime.setText(hourminute_t[i]);
                 textViewscheduleName.setText(scheduleName_t[i]);
@@ -362,11 +361,11 @@ public class RouteTime extends AppCompatActivity {
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
             param.leftMargin = 300; //출발,도착역
             param.bottomMargin = 15;
-            param.topMargin = 12;
+            param.topMargin = 30;
 
             LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param1.leftMargin =70; //열차시간
+            param1.leftMargin =130; //열차시간
             param1.topMargin = 5;
             param1.bottomMargin=-80;
 
@@ -378,24 +377,26 @@ public class RouteTime extends AppCompatActivity {
 
             LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param3.leftMargin = 250; //호선
+            param3.leftMargin = 70; //호선
             param3.bottomMargin = -80;
-            param3.topMargin = 40;
-            param3.width=80;
-            param3.height=80;
+            param3.topMargin = 20;
+            param3.width=45;
+            param3.height=45;
 
             LinearLayout.LayoutParams param4 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param4.leftMargin = 500; //방면
-            param4.bottomMargin = 0;
-            param4.topMargin = -80;
+            param4.leftMargin = 300; //방면
+            param4.bottomMargin = 10;
+            param4.topMargin = 0;
 
             LinearLayout.LayoutParams param5 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT
                     , LinearLayout.LayoutParams.WRAP_CONTENT);
-            param5.leftMargin = 180; //혼잡도
-            param5.bottomMargin = -80;
+            param5.leftMargin = 220; //혼잡도
+            param5.bottomMargin = -70;
             param5.topMargin = 20;
-            param5.width=30;
+            param5.width=40;
+            param5.height=40;
+
 
 
             // 7. 설정한 레이아웃 텍스트뷰에 적용
@@ -409,121 +410,148 @@ public class RouteTime extends AppCompatActivity {
             //8. 텍스트뷰 백그라운드색상 설정
             textViewNm.setBackgroundColor(Color.rgb(255, 255, 255));
             textViewTransfer.setBackgroundColor(Color.rgb(255, 255, 255));
-            textViewTime.setBackgroundColor(Color.rgb(255, 255, 255));
+            textViewTime.setBackgroundColor(Color.rgb(0, 255, 255));
             textViewscheduleName.setBackgroundColor(Color.rgb(255, 255, 255));
-
-
+            textViewlineId.setBackgroundColor(Color.rgb(255, 0, 255));
             //혼잡도
             if(congestScore_t[i].equals("3")) {
                 textViewcongestScore.setBackgroundColor(Color.RED);
                 textViewcongestScore.setTextColor(Color.RED);
+                textViewcongestScore.setBackgroundResource(R.drawable.round_red);
             }
             else if(congestScore_t[i].equals("2")) {
                 textViewcongestScore.setBackgroundColor(Color.YELLOW);
                 textViewcongestScore.setTextColor(Color.YELLOW);
+                textViewcongestScore.setBackgroundResource(R.drawable.round_yellow);
             }
             else if(congestScore_t[i].equals("1")) {
                 textViewcongestScore.setBackgroundColor(Color.GREEN);
                 textViewcongestScore.setTextColor(Color.GREEN);
+
+                textViewcongestScore.setBackgroundResource(R.drawable.round_green);
             }
             /*else if(congestScore_t[i]==0) {
                 textViewcongestScore.setBackgroundColor(Color.YELLOW);
                 textViewcongestScore.setTextColor(Color.YELLOW);
             }*/
 
+            textViewlineId.setGravity(Gravity.CENTER);
+            textViewlineId.setTypeface(null, Typeface.BOLD);
 
             if(lineId_t[i].equals("1")) {
                 textViewlineId.setTextColor(Color.rgb(255,255,255));
                 textViewlineId.setBackgroundColor(Color.rgb(13,54,146));
+                textViewlineId.setBackgroundResource(R.drawable.line_1);
             }
             else if(lineId_t[i].equals("2")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
-                //textViewlineId.setBackgroundColor(Color.rgb(51,162,61));
-                textViewlineId.setBackgroundResource(R.drawable.shape);
+                textViewlineId.setBackgroundColor(Color.rgb(51,162,61));
+                textViewlineId.setBackgroundResource(R.drawable.line_2);
             }
             else if(lineId_t[i].equals("3")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(254,91,16));
+                textViewlineId.setBackgroundResource(R.drawable.line_3);
             }
             else if(lineId_t[i].equals("4")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(0,162,209));
+                textViewlineId.setBackgroundResource(R.drawable.line_4);
             }
             else if(lineId_t[i].equals("5")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(139,80,164));
+                textViewlineId.setBackgroundResource(R.drawable.line_5);
             }
             else if(lineId_t[i].equals("6")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(197,92,29));
+                textViewlineId.setBackgroundResource(R.drawable.line_6);
             }
             else if(lineId_t[i].equals("7")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(84,100,13));
+                textViewlineId.setBackgroundResource(R.drawable.line_7);
             }
             else if(lineId_t[i].equals("8")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(241,46,130));
+                textViewlineId.setBackgroundResource(R.drawable.line_8);
             }
             else if(lineId_t[i].equals("9")){
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(170,152,114));
+                textViewlineId.setBackgroundResource(R.drawable.line_9);
             }
             else if(lineId_t[i].equals("21")){//인천1호선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#759CCE"));
+                textViewlineId.setBackgroundResource(R.drawable.line_21);
             }
             else if(lineId_t[i].equals("22")){//인천2호선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#F5A251"));
+                textViewlineId.setBackgroundResource(R.drawable.line_22);
             }
             else if(lineId_t[i].equals("102")){//자기부상철도
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#FFAE43"));
+                textViewlineId.setBackgroundResource(R.drawable.line_102);
             }
             else if(lineId_t[i].equals("107")){//용인에버라인
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#51E800"));
+                textViewlineId.setBackgroundResource(R.drawable.line_107);
             }
             else if(lineId_t[i].equals("109")){//신분당선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#BA0C2F"));
+                textViewlineId.setBackgroundResource(R.drawable.line_109);
             }
             else if(lineId_t[i].equals("110")){//의정부경전철
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#FFA100"));
+                textViewlineId.setBackgroundResource(R.drawable.line_110);
             }
             else if(lineId_t[i].equals("113")){//우이신설선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#C7D138"));
+                textViewlineId.setBackgroundResource(R.drawable.line_113);
             }
             else if(lineId_t[i].equals("114")){//서해선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#84BD00"));
+                textViewlineId.setBackgroundResource(R.drawable.line_114);
             }
             else if(lineId_t[i].equals("115")){//김포골드라인
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.parseColor("#AD8605"));
+                textViewlineId.setBackgroundResource(R.drawable.line_115);
             }
             else if(lineId_t[i].equals("104")){ //경의중앙선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(115,199,166));
+                textViewlineId.setBackgroundResource(R.drawable.line_104);
             }
             else if(lineId_t[i].equals("116")){//수인분당선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(255,140,0));
+                textViewlineId.setBackgroundResource(R.drawable.line_116);
             }
             else if(lineId_t[i].equals("108")){//경춘선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(50,198,166));
+                textViewlineId.setBackgroundResource(R.drawable.line_108);
             }
             else if(lineId_t[i].equals("112")){//경강선
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(0,84,166));
+                textViewlineId.setBackgroundResource(R.drawable.line_112);
             }
             else if(lineId_t[i].equals("101")){//공항철도
                 textViewlineId.setTextColor((Color.rgb(255,255,255)));
                 textViewlineId.setBackgroundColor(Color.rgb(54,129,183));
+                textViewlineId.setBackgroundResource(R.drawable.line_101);
             }
 
             //9. 생성및 설정된 텍스트뷰 레이아웃에 적용
