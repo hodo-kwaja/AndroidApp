@@ -284,6 +284,7 @@ public class RouteTime extends AppCompatActivity {
                 textViewTime.setText(hourminute_t[i]);
                 textViewTime.setTypeface(null, Typeface.BOLD); //열차시간 글씨 굵게
                 textViewTransfer.setText(transferTime_t[i]);
+                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
 
                 T.setTextSize(11); //환승표시 텍스트 크기
                 textViewNm.setTextSize(23);//환승역(첫번째) 텍스트 크기 지정
@@ -292,6 +293,7 @@ public class RouteTime extends AppCompatActivity {
                 //텍스트뷰와 레이아웃 연결
                 listView.addView(T);
                 listView.addView(textViewTime);
+                listView.addView(textViewcongestScore);
                 listView.addView(textViewNm);
                 listView.addView(textViewTransfer);
 
@@ -302,6 +304,7 @@ public class RouteTime extends AppCompatActivity {
                 textViewTime.setText(hourminute_t[i]);
                 textViewTime.setTypeface(null, Typeface.BOLD); //열차시간 글씨 굵게
                 textViewscheduleName.setText(scheduleName_t[i]);
+                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
                 textViewscheduleName.setTextSize(13); // 방면 텍스트 크기 지정
                 textViewNm.setTextSize(23);
                 textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
@@ -309,22 +312,26 @@ public class RouteTime extends AppCompatActivity {
                 //텍스트뷰와 레이아웃 연결
                 listView.addView(textViewlineId);
                 listView.addView(textViewTime);
+                listView.addView(textViewcongestScore);
                 listView.addView(textViewNm);
                 listView.addView(textViewscheduleName);
 
 
             } else if (i == numStep_ - 1) { //도착역 처리
                 textViewTime.setText(hourminute_t[i]);
+                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
                 textViewTime.setTypeface(null, Typeface.BOLD); //열차시간 글씨 굵게
                 textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
                 textViewNm.setTextSize(23);
 
                 //텍스트뷰와 레이아웃 연결
                 listView.addView(textViewTime);
+                listView.addView(textViewcongestScore);
                 listView.addView(textViewNm);
 
             } else { //경유역, 혼잡도
                 textViewcongestScore.setText(congestScore_t[i]);//혼잡도
+                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
                 textViewNm.setTextSize(15); //경유역 텍스트 크기
 
                 //텍스트뷰와 레이아웃 연결
