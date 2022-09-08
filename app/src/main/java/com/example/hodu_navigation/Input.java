@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,14 +33,39 @@ public class Input extends AppCompatActivity {
     static String formattedNow; //시간
     static String week; //요일
 
+    View view1, view2;
     String text;
     static int count =0;
+    GestureDetector detector; //무슨 제스쳐를 했는지 감지
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.input);
+        ////////
 
+        view1 = findViewById(R.id.photoView);
+
+        view1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                float curX = event.getX();  //눌린 곳의 X좌표
+                float curY = event.getY();  //눌린 곳의 Y좌표
+
+                if(action == event.ACTION_DOWN) {   //처음 눌렸을 때
+                    Log.d("손가락 눌림 : ", + curX + ", " + curY);
+                } /*else if(action == event.ACTION_MOVE) {    //누르고 움직였을 때
+                    Log.d("손가락 움직임 : " , curX + ", " +  curY);
+                } else if(action == event.ACTION_UP) {    //누른걸 뗐을 때
+                    Log.d("손가락 뗌 : ", curX + ", " + curY);*/
+
+                return true;
+
+            }
+        });
+
+        ////////
         EditText departure=(EditText) findViewById(R.id.Edit1);// 출발역 입력칸
         EditText arrival=(EditText) findViewById(R.id.Edit2); // 도착역 입력칸
 

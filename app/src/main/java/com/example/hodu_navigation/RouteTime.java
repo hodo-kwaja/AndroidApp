@@ -3,10 +3,13 @@ package com.example.hodu_navigation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -17,6 +20,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.graphics.Color;
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -25,6 +31,9 @@ import android.view.View;
 import android.graphics.Typeface;
 
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.kyleduo.switchbutton.SwitchButton;
 
 
 public class RouteTime extends AppCompatActivity {
@@ -96,9 +105,9 @@ public class RouteTime extends AppCompatActivity {
 
         //assets/ test.json 파일 읽기 위한 InputStream
         try {
-            //InputStream is = assetManager.open("test.json"); //환승 1회
+            InputStream is = assetManager.open("test.json"); //환승 1회
             //InputStream is = assetManager.open("test1.json"); //환승 2회
-            InputStream is = assetManager.open("test2.json"); //환승 2회
+            //InputStream is = assetManager.open("test2.json"); //환승 2회
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
 
@@ -229,7 +238,46 @@ public class RouteTime extends AppCompatActivity {
             numStep_textview.setText(numStep_t);
             transferNum_textview.setText(transferNum_t);
 
+            //////////////////진동 울리기//////////////////
+            SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
+            switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("H:m");
+                    String getTime = dateFormat.format(date);
+
+                    // 스위치 버튼이 체크되었는지 검사하여 진동 울리기
+                    if (isChecked) {
+
+                            if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
+                                Toast.makeText(getApplicationContext(), "목적지에 도착하였습니다.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            while (!getTime.equals(hourminute_t[numStep_ - 2])) {
+                                now = System.currentTimeMillis();
+                                date = new Date(now);
+                                dateFormat = new SimpleDateFormat("H:m");
+                                getTime = dateFormat.format(date);
+
+                                Log.d("현재시간", "현재시간: " + getTime);
+                                Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);
+
+                            }
+                            for (int j = 0; j < 3; j++) {
+                                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                vibrator.vibrate(1000); // 1초간 진동
+                                break;
+                            }
+                    }
+                }
+            });
+
+            ////////////////////////////////////////
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

@@ -4,7 +4,7 @@
     package="com.example.hodu_navigation">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name = "android.permission.VIBRATE"/> //진동 사용 위해 권한 요청
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"

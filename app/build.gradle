@@ -53,4 +53,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.android.support:multidex: 1.0.3'
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.kyleduo.switchbutton:library:2.0.0' //스위치버튼
 }
