@@ -1,8 +1,12 @@
 package com.example.hodu_navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -20,8 +24,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import android.graphics.Color;
 import android.view.Gravity;
@@ -67,6 +74,12 @@ public class RouteTime extends AppCompatActivity {
     String[] scheduleName_t = new String[100];
     String[] lineId_t = new String[100];
     String[] congestScore_t = new String[100];
+
+    private AlarmManager alarmManager;
+    private GregorianCalendar mCalender;
+
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,7 +251,30 @@ public class RouteTime extends AppCompatActivity {
             numStep_textview.setText(numStep_t);
             transferNum_textview.setText(transferNum_t);
 
-            //////////////////진동 울리기//////////////////
+
+
+            ///// 푸시알람 ////
+
+            notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+            alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+            mCalender = new GregorianCalendar();
+
+            Log.v("HelloAlarmActivity", mCalender.getTime().toString());
+
+
+            //접수일 알람 버튼
+            SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
+            switchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setAlarm();
+                }
+            });
+
+
+            /*//////////////////진동 울리기//////////////////
             SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
             switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -275,7 +311,7 @@ public class RouteTime extends AppCompatActivity {
                             }
                     }
                 }
-            });
+            });*/
 
             ////////////////////////////////////////
         } catch (IOException e) {
@@ -284,12 +320,33 @@ public class RouteTime extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
     }
 
     @SuppressLint("ResourceType")
 
+    private void setAlarm() {
+        //AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(RouteTime.this, AlarmRecevier.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(RouteTime.this, 0, receiverIntent, 0);
 
+        String from = "2022-09-13 22:49:00"; //임의로 날짜와 시간을 지정
+
+        //날짜 포맷을 바꿔주는 소스코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date datetime = null;
+        try {
+            datetime = dateFormat.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);
+
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
+
+
+    }
     private void createBigView() {
 
         for (int i = 0; i < numStep_; i++) {
