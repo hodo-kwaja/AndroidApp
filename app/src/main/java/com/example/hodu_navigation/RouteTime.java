@@ -2,6 +2,7 @@ package com.example.hodu_navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -13,6 +14,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -21,14 +23,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import android.graphics.Color;
 import android.view.Gravity;
@@ -36,14 +41,16 @@ import android.widget.LinearLayout;
 
 import android.view.View;
 import android.graphics.Typeface;
-
-import android.widget.Button;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.kyleduo.switchbutton.SwitchButton;
 
 
 public class RouteTime extends AppCompatActivity {
+
+    /*public static final String TAG = "MAIN";
+    private TextView time_text;*/
 
     //뒤로가기 버튼 누르면 Input 액티비티로 이동
     @Override
@@ -75,17 +82,24 @@ public class RouteTime extends AppCompatActivity {
     String[] lineId_t = new String[100];
     String[] congestScore_t = new String[100];
 
-    private AlarmManager alarmManager;
-    private GregorianCalendar mCalender;
-
-    private NotificationManager notificationManager;
-    NotificationCompat.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.route_time);
+
+        /*time_text = findViewById(R.id.time_text);*//*
+        Button time_btn = findViewById(R.id.time_btn);
+
+        //시간 설정
+        time_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
+
 
         /////////////////////////////////////////////////////
         //최소환승 버튼 클릭시 화면 전환
@@ -107,6 +121,13 @@ public class RouteTime extends AppCompatActivity {
         });
         //////////////////////////////////////////////////////////////////
 
+        /*Button alarm_t=(Button) findViewById(R.id.alarm);
+        alarm_t.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Alarm.class);
+                startActivity(intent);
+            }
+        });*/
         listView = findViewById(R.id.listView);
 
         //xml 아이디 - textview 지정
@@ -114,7 +135,22 @@ public class RouteTime extends AppCompatActivity {
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
 
-        AssetManager assetManager = getAssets();
+        try{
+                FileReader is = new FileReader("/storage/emulated/0/Download/test4.json");
+                BufferedReader reader = new BufferedReader(is);
+
+                StringBuffer buffer = new StringBuffer();
+                String line = reader.readLine();
+            while(line != null) {
+                buffer.append(line + "\n");
+                line = reader.readLine();
+            }
+
+            //읽을 라인이 없을 경우 br은 null을 리턴한다.
+
+
+
+        /*AssetManager assetManager = getAssets();
 
         //assets/ test.json 파일 읽기 위한 InputStream
         try {
@@ -129,7 +165,7 @@ public class RouteTime extends AppCompatActivity {
             while (line != null) {
                 buffer.append(line + "\n");
                 line = reader.readLine();
-            }
+            }*/
 
 
             String jsonData = buffer.toString();
@@ -252,44 +288,24 @@ public class RouteTime extends AppCompatActivity {
             transferNum_textview.setText(transferNum_t);
 
 
-
-            ///// 푸시알람 ////
-
-            notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-
-            alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-            mCalender = new GregorianCalendar();
-
-            Log.v("HelloAlarmActivity", mCalender.getTime().toString());
-
-
-            //접수일 알람 버튼
-            SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
-            switchButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setAlarm();
-                }
-            });
-
-
-            /*//////////////////진동 울리기//////////////////
+            //////////////////진동 울리기//////////////////
             SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
             switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    long now = System.currentTimeMillis();
+                    /*long now = System.currentTimeMillis();
                     Date date = new Date(now);
                     SimpleDateFormat dateFormat = new SimpleDateFormat("H:m");
-                    String getTime = dateFormat.format(date);
+                    String getTime = dateFormat.format(date);*/
 
                     // 스위치 버튼이 체크되었는지 검사하여 진동 울리기
                     if (isChecked) {
+                        DialogFragment timePicker = new TimePickerFragment();
+                        timePicker.show(getSupportFragmentManager(), "time picker");
 
-                            if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
+                            /*if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
                                 Toast.makeText(getApplicationContext(), "목적지에 도착하였습니다.", Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -308,10 +324,10 @@ public class RouteTime extends AppCompatActivity {
                                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                                 vibrator.vibrate(1000); // 1초간 진동
                                 break;
-                            }
+                            }*/
                     }
                 }
-            });*/
+            });
 
             ////////////////////////////////////////
         } catch (IOException e) {
@@ -324,29 +340,7 @@ public class RouteTime extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
 
-    private void setAlarm() {
-        //AlarmReceiver에 값 전달
-        Intent receiverIntent = new Intent(RouteTime.this, AlarmRecevier.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(RouteTime.this, 0, receiverIntent, 0);
 
-        String from = "2022-09-13 22:49:00"; //임의로 날짜와 시간을 지정
-
-        //날짜 포맷을 바꿔주는 소스코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try {
-            datetime = dateFormat.parse(from);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);
-
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
-
-
-    }
     private void createBigView() {
 
         for (int i = 0; i < numStep_; i++) {

@@ -54,4 +54,5 @@ dependencies {
     implementation 'com.android.support:multidex: 1.0.3'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.kyleduo.switchbutton:library:2.0.0' //스위치버튼
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
