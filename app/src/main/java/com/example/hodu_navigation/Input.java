@@ -132,15 +132,15 @@ public class Input extends AppCompatActivity {
                 Log.d("현재분", "now: " + formattedM);
                 Log.d("현재시간날짜", "요일: " + week);
 
-                /*Toast.makeText(getApplicationContext(), "짧게 출력 Hello World!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "짧게 출력 Hello World!", Toast.LENGTH_SHORT).show();
                 Thread th = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         FileWriter writer = null;
                         try {
                             StringBuffer sb = new StringBuffer();
-                            *//*StringBuilder sb1 = new StringBuilder();
-                            sb1.append("http://172.30.4.105:8080/navi/?departure=");
+                            StringBuilder sb1 = new StringBuilder();
+                            sb1.append("http://hodometro.iptime.org:8080/navi/?departure=");
                             sb1.append(departure_text);
                             sb1.append("&arrival=");
                             sb1.append(arrival_text);
@@ -151,8 +151,8 @@ public class Input extends AppCompatActivity {
                             sb1.append("&week=");
                             sb1.append(week);
 
-                            URL url = new URL(sb1.toString());*//*
-                            URL url = new URL("http://172.30.4.105:8080/navi/?departure=천안&arrival=신창&hour=15&minute=53&week=W");
+                            URL url = new URL(sb1.toString());
+                            //URL url = new URL("http://172.30.4.105:8080/navi/?departure=천안&arrival=신창&hour=15&minute=53&week=W");
 
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -169,22 +169,34 @@ public class Input extends AppCompatActivity {
                                             break;
                                         sb.append(line + "\n");
                                     }
-                                    Log.d("myLog", sb.toString());
+                                    Log.d("mylog", sb.toString());
                                     br.close();
                                 }
                                 conn.disconnect();
                             }
 
                             // 받아온 source를 JSONObject로 변환한다.
-                            JSONObject jsonObj = new JSONObject(sb.toString());
+                            /*JSONObject jsonObj = new JSONObject(sb.toString());
 
                             JsonParser parser = new JsonParser();
                             JsonObject j = parser.parse(String.valueOf(jsonObj)).getAsJsonObject();
 
-                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                            String json = gson.toJson(jsonObj);
+                            //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                            Gson gson = new GsonBuilder().create();
+                            String json = gson.toJson(jsonObj);*/
+
+                            /*JSONObject jsonObj = new JSONObject(sb.toString());
+
+                            Gson gson = new GsonBuilder().create();
+                            String json = gson.toJson(jsonObj);*/
+
+                            JSONObject jsonObj = new JSONObject(sb.toString());
+                            String json = jsonObj.toString();
+
+                            Log.d("mylog2", json);
+
                             try {
-                                writer = new FileWriter("/storage/emulated/0/Download/Path1.json");
+                                writer = new FileWriter("/storage/emulated/0/Download/Path3.json");
                                 writer.write(json);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -203,7 +215,7 @@ public class Input extends AppCompatActivity {
                     }
                 });
 
-                th.start();*/
+                th.start();
                 //버튼 클릭하면 현재시간, 요일 구함
 
 

@@ -136,7 +136,7 @@ public class RouteTime extends AppCompatActivity {
         transferNum_textview = findViewById(R.id.transferNum);
 
         try{
-                FileReader is = new FileReader("/storage/emulated/0/Download/test4.json");
+                FileReader is = new FileReader("/storage/emulated/0/Download/Path3.json");
                 BufferedReader reader = new BufferedReader(is);
 
                 StringBuffer buffer = new StringBuffer();
