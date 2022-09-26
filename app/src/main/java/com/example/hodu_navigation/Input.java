@@ -45,7 +45,6 @@ public class Input extends AppCompatActivity {
     static String formattedH; //시
     static String formattedM;  //분
     static String week; //요일
-
     String text;
     static int count = 0;
 
@@ -117,6 +116,7 @@ public class Input extends AppCompatActivity {
                     e.printStackTrace();
                 }*/
 
+                /*Log.d("inputcnt", cnt);*/
                 Date currentDate = new Date();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentDate);
@@ -206,7 +206,7 @@ public class Input extends AppCompatActivity {
                             Log.d("mylog2", json);
 
                             try {
-                                writer = new FileWriter("/storage/emulated/0/Download/Path3.json",false);
+                                writer = new FileWriter("/storage/emulated/0/Download/Path7.json",false);
                                 writer.write(json);
                                 Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
                                 startActivity(intent);

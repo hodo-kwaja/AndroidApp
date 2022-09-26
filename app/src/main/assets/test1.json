@@ -1,245 +1,577 @@
 {
-  "ShortestPath": [
+  "ShortestPath":[
     {
-      "stationName": "신림",
-      "stationCode": "230",
-      "lineId": "2",
-      "schedule": {
-        "lineDirection": "1",
-        "weekType": "W",
-        "hour": 9,
-        "minute": 54,
-        "typeName": "N",
-        "scheduleName": "성수",
-        "congestScore": 2,
-        "duration": 0,
-        "numStep": 0
+      "stationName":"세류",
+      "stationCode":"P156",
+      "lineId":1,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":43,
+        "typeName":"N",
+        "scheduleName":"광운대",
+        "congestScore":0,
+        "duration":0,
+        "numStep":0
       },
-      "transfer": {
-        "transferNum": 0,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":0,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "봉천",
-      "stationCode": "229",
-      "lineId": "2",
-      "schedule": {
-        "lineDirection": "1",
-        "weekType": "W",
-        "hour": 9,
-        "minute": 56,
-        "typeName": "N",
-        "scheduleName": "성수",
-        "congestScore": 3,
-        "duration": 2,
-        "numStep": 1
+      "stationName":"수원",
+      "stationCode":"P155",
+      "lineId":1,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":47,
+        "typeName":"N",
+        "scheduleName":"광운대",
+        "congestScore":0,
+        "duration":4,
+        "numStep":1
       },
-      "transfer": {
-        "transferNum": 0,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":true,
+        "transferDistance":240,
+        "transferTime":255
       }
     },
     {
-      "stationName": "서울대입구",
-      "stationCode": "228",
-      "lineId": "2",
-      "schedule": {
-        "lineDirection": "1",
-        "weekType": "W",
-        "hour": 9,
-        "minute": 58,
-        "typeName": "N",
-        "scheduleName": "성수",
-        "congestScore": 1,
-        "duration": 4,
-        "numStep": 2
+      "stationName":"수원",
+      "stationCode":"K245",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":50,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":1
       },
-      "transfer": {
-        "transferNum": 0,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":true,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "낙성대",
-      "stationCode": "227",
-      "lineId": "2",
-      "schedule": {
-        "lineDirection": "1",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 0,
-        "typeName": "N",
-        "scheduleName": "성수",
-        "congestScore": 2,
-        "duration": 6,
-        "numStep": 3
+      "stationName":"매교",
+      "stationCode":"K244",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":53,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":2
       },
-      "transfer": {
-        "transferNum": 0,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "사당",
-      "stationCode": "433",
-      "lineId": "2",
-      "schedule": {
-        "lineDirection": "1",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 3,
-        "typeName": "N",
-        "scheduleName": "성수",
-        "congestScore": 0,
-        "duration": 9,
-        "numStep": 4
+      "stationName":"수원시청",
+      "stationCode":"K243",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":55,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":3
       },
-      "transfer": {
-        "transferNum": 1,
-        "isTransfer": true,
-        "transferDistance": 111,
-        "transferTime": 120
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "사당",
-      "stationCode": "433",
-      "lineId": "4",
-      "schedule": {
-        "lineDirection": "0",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 9,
-        "typeName": "N",
-        "scheduleName": "오이도",
-        "congestScore": 0,
-        "duration": 15,
-        "numStep": 4
+      "stationName":"매탄권선",
+      "stationCode":"K242",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":58,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":4
       },
-      "transfer": {
-        "transferNum": 1,
-        "isTransfer": true,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "남태령",
-      "stationCode": "434",
-      "lineId": "4",
-      "schedule": {
-        "lineDirection": "0",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 12,
-        "typeName": "N",
-        "scheduleName": "오이도",
-        "congestScore": 2,
-        "duration": 18,
-        "numStep": 5
+      "stationName":"망포",
+      "stationCode":"K241",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":1,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":5
       },
-      "transfer": {
-        "transferNum": 1,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "선바위",
-      "stationCode": "435",
-      "lineId": "4",
-      "schedule": {
-        "lineDirection": "0",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 15,
-        "typeName": "N",
-        "scheduleName": "오이도",
-        "congestScore": 2,
-        "duration": 21,
-        "numStep": 6
+      "stationName":"영통",
+      "stationCode":"K240",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":3,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":6
       },
-      "transfer": {
-        "transferNum": 1,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "경마공원",
-      "stationCode": "436",
-      "lineId": "4",
-      "schedule": {
-        "lineDirection": "0",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 17,
-        "typeName": "N",
-        "scheduleName": "오이도",
-        "congestScore": 3,
-        "duration": 23,
-        "numStep": 7
+      "stationName":"청명",
+      "stationCode":"K239",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":5,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":7
       },
-      "transfer": {
-        "transferNum": 2,
-        "isTransfer": true,
-        "transferDistance": 100,
-        "transferTime": 60
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "경마공원",
-      "stationCode": "436",
-      "lineId": "5",
-      "schedule": {
-        "lineDirection": "0",
-        "weekType": "W",
-        "hour": 10,
-        "minute": 18,
-        "typeName": "N",
-        "scheduleName": "오이도",
-        "congestScore": 3,
-        "duration": 23,
-        "numStep": 7
+      "stationName":"상갈",
+      "stationCode":"K238",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":9,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":4,
+        "numStep":8
       },
-      "transfer": {
-        "transferNum": 2,
-        "isTransfer": true,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     },
     {
-      "stationName": "대공원",
-      "stationCode": "437",
-      "lineId": "5",
-      "schedule": {
-        "lineDirection": 0,
-        "weekType": "W",
-        "hour": 10,
-        "minute": 19,
-        "typeName": "N",
-        "scheduleName": "오이도",
-        "congestScore": 3,
-        "duration": 25,
-        "numStep": 8
+      "stationName":"기흥",
+      "stationCode":"K237",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":11,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":9
       },
-      "transfer": {
-        "transferNum": 2,
-        "isTransfer": false,
-        "transferDistance": 0,
-        "transferTime": 0
+      "transfer":{
+        "transferNum":2,
+        "isTransfer":true,
+        "transferDistance":240,
+        "transferTime":288
+      }
+    },
+    {
+      "stationName":"기흥",
+      "stationCode":"Y110",
+      "lineId":107,
+      "schedule":{
+        "lineDirection":0,
+        "weekType":"W",
+        "hour":11,
+        "minute":12,
+        "typeName":"N",
+        "scheduleName":"전대·에버랜드",
+        "congestScore":0,
+        "duration":1,
+        "numStep":9
+      },
+      "transfer":{
+        "transferNum":2,
+        "isTransfer":true,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"강남대",
+      "stationCode":"Y111",
+      "lineId":107,
+      "schedule":{
+        "lineDirection":0,
+        "weekType":"W",
+        "hour":11,
+        "minute":13,
+        "typeName":"N",
+        "scheduleName":"전대·에버랜드",
+        "congestScore":0,
+        "duration":1,
+        "numStep":10
+      },
+      "transfer":{
+        "transferNum":2,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    }
+  ],
+  "LowTransferPath":[
+    {
+      "stationName":"세류",
+      "stationCode":"P156",
+      "lineId":1,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":43,
+        "typeName":"N",
+        "scheduleName":"광운대",
+        "congestScore":0,
+        "duration":0,
+        "numStep":0
+      },
+      "transfer":{
+        "transferNum":0,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"수원",
+      "stationCode":"P155",
+      "lineId":1,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":47,
+        "typeName":"N",
+        "scheduleName":"광운대",
+        "congestScore":0,
+        "duration":4,
+        "numStep":1
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":true,
+        "transferDistance":240,
+        "transferTime":255
+      }
+    },
+    {
+      "stationName":"수원",
+      "stationCode":"K245",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":50,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":1
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":true,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"매교",
+      "stationCode":"K244",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":53,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":2
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"수원시청",
+      "stationCode":"K243",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":55,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":3
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"매탄권선",
+      "stationCode":"K242",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":10,
+        "minute":58,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":4
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"망포",
+      "stationCode":"K241",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":1,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":3,
+        "numStep":5
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"영통",
+      "stationCode":"K240",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":3,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":6
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"청명",
+      "stationCode":"K239",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":5,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":7
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"상갈",
+      "stationCode":"K238",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":9,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":4,
+        "numStep":8
+      },
+      "transfer":{
+        "transferNum":1,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"기흥",
+      "stationCode":"K237",
+      "lineId":116,
+      "schedule":{
+        "lineDirection":1,
+        "weekType":"W",
+        "hour":11,
+        "minute":11,
+        "typeName":"N",
+        "scheduleName":"청량리",
+        "congestScore":0,
+        "duration":2,
+        "numStep":9
+      },
+      "transfer":{
+        "transferNum":2,
+        "isTransfer":true,
+        "transferDistance":240,
+        "transferTime":288
+      }
+    },
+    {
+      "stationName":"기흥",
+      "stationCode":"Y110",
+      "lineId":107,
+      "schedule":{
+        "lineDirection":0,
+        "weekType":"W",
+        "hour":11,
+        "minute":12,
+        "typeName":"N",
+        "scheduleName":"전대·에버랜드",
+        "congestScore":0,
+        "duration":1,
+        "numStep":9
+      },
+      "transfer":{
+        "transferNum":2,
+        "isTransfer":true,
+        "transferDistance":0,
+        "transferTime":0
+      }
+    },
+    {
+      "stationName":"강남대",
+      "stationCode":"Y111",
+      "lineId":107,
+      "schedule":{
+        "lineDirection":0,
+        "weekType":"W",
+        "hour":11,
+        "minute":13,
+        "typeName":"N",
+        "scheduleName":"전대·에버랜드",
+        "congestScore":0,
+        "duration":1,
+        "numStep":10
+      },
+      "transfer":{
+        "transferNum":2,
+        "isTransfer":false,
+        "transferDistance":0,
+        "transferTime":0
       }
     }
   ]

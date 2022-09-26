@@ -136,9 +136,9 @@ public class RouteTime extends AppCompatActivity {
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
 
-        try{
+        /*try{
 
-                FileReader is = new FileReader("/storage/emulated/0/Download/Path3.json");
+                FileReader is = new FileReader("/storage/emulated/0/Download/Path7.json");
 
                 BufferedReader reader = new BufferedReader(is);
 
@@ -147,13 +147,13 @@ public class RouteTime extends AppCompatActivity {
             while(line != null) {
                 buffer.append(line + "\n");
                 line = reader.readLine();
-            }
+            }*/
 
             //읽을 라인이 없을 경우 br은 null을 리턴한다.
 
 
 
-        /*AssetManager assetManager = getAssets();
+        AssetManager assetManager = getAssets();
 
         //assets/ test.json 파일 읽기 위한 InputStream
         try {
@@ -168,11 +168,11 @@ public class RouteTime extends AppCompatActivity {
             while (line != null) {
                 buffer.append(line + "\n");
                 line = reader.readLine();
-            }*/
+            }
 
 
             String jsonData = buffer.toString();
-
+            Log.d("jsonlog", jsonData);
             //json 데이터가 ShortestPath 일 경우
             JSONObject jsonObject = new JSONObject(jsonData);
 
