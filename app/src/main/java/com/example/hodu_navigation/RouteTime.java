@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -136,7 +137,9 @@ public class RouteTime extends AppCompatActivity {
         transferNum_textview = findViewById(R.id.transferNum);
 
         try{
+
                 FileReader is = new FileReader("/storage/emulated/0/Download/Path3.json");
+
                 BufferedReader reader = new BufferedReader(is);
 
                 StringBuffer buffer = new StringBuffer();
@@ -154,9 +157,9 @@ public class RouteTime extends AppCompatActivity {
 
         //assets/ test.json 파일 읽기 위한 InputStream
         try {
-            InputStream is = assetManager.open("test.json"); //환승 1회
+            //InputStream is = assetManager.open("test.json"); //환승 1회
             //InputStream is = assetManager.open("test1.json"); //환승 2회
-            //InputStream is = assetManager.open("test2.json"); //환승 2회
+            InputStream is = assetManager.open("test2.json"); //환승 2회
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
 
@@ -610,6 +613,7 @@ public class RouteTime extends AppCompatActivity {
                 textViewlineId.setBackgroundResource(R.drawable.line_101);
             }
         }
+
     }
 }
 

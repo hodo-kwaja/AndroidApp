@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -107,6 +108,15 @@ public class Input extends AppCompatActivity {
         search_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+               /* try{
+                    File file = new File("/storage/emulated/0/Download/Path3.json");
+                    if(file.exists()){
+                        file.delete();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }*/
+
                 Date currentDate = new Date();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentDate);
@@ -152,7 +162,7 @@ public class Input extends AppCompatActivity {
                             sb1.append(week);
 
                             URL url = new URL(sb1.toString());
-                            //URL url = new URL("http://172.30.4.105:8080/navi/?departure=천안&arrival=신창&hour=15&minute=53&week=W");
+                            //URL url = new URL("http://hodometro.iptime.org:8080/navi/?departure=천안&arrival=신창&hour=15&minute=53&week=W");
 
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -196,8 +206,11 @@ public class Input extends AppCompatActivity {
                             Log.d("mylog2", json);
 
                             try {
-                                writer = new FileWriter("/storage/emulated/0/Download/Path3.json");
+                                writer = new FileWriter("/storage/emulated/0/Download/Path3.json",false);
                                 writer.write(json);
+                                Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
+                                startActivity(intent);
+                                finish();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }finally {
@@ -217,10 +230,8 @@ public class Input extends AppCompatActivity {
 
                 th.start();
                 //버튼 클릭하면 현재시간, 요일 구함
-
-
-
-
+                /*Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
+                startActivity(intent);*/
                 //////////////////////json 파싱/////////////////////////////////
 
 /*                ArrayList List =new ArrayList();
@@ -229,7 +240,7 @@ public class Input extends AppCompatActivity {
                 List.add(2, formattedNow);
                 List.add(3,week);*/
 
-                JSONObject obj = new JSONObject();
+                /*JSONObject obj = new JSONObject();
                 try {
                     obj.put("departure", departure_text);
                     obj.put("arrival", arrival_text);
@@ -241,10 +252,9 @@ public class Input extends AppCompatActivity {
 
                 } catch (JSONException ex) {
                     ex.printStackTrace();
-                }
+                }*/
 
-                Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
-                startActivity(intent);
+
             }
         });
 
