@@ -73,6 +73,7 @@ public class RouteTime extends AppCompatActivity {
     int numStep_ = 0;
     int[] countf = new int[100];
     int[] countl = new int[100];
+    int[] duration = new int[100];
     String duration_t = "";
     String numStep_t = "";
     String transferNum_t = "";
@@ -136,7 +137,7 @@ public class RouteTime extends AppCompatActivity {
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
 
-        /*try{
+        try{
 
                 FileReader is = new FileReader("/storage/emulated/0/Download/Path7.json");
 
@@ -147,13 +148,13 @@ public class RouteTime extends AppCompatActivity {
             while(line != null) {
                 buffer.append(line + "\n");
                 line = reader.readLine();
-            }*/
+            }
 
             //읽을 라인이 없을 경우 br은 null을 리턴한다.
 
 
 
-        AssetManager assetManager = getAssets();
+        /*AssetManager assetManager = getAssets();
 
         //assets/ test.json 파일 읽기 위한 InputStream
         try {
@@ -168,7 +169,7 @@ public class RouteTime extends AppCompatActivity {
             while (line != null) {
                 buffer.append(line + "\n");
                 line = reader.readLine();
-            }
+            }*/
 
 
             String jsonData = buffer.toString();
@@ -202,6 +203,8 @@ public class RouteTime extends AppCompatActivity {
 
                 //전체역 담는 배열
                 staitonName_tt[i] = stationName_a;
+
+
 
                 //전체역 환승 여부 체크
                 Boolean isTransfer = transfer_a.getBoolean("isTransfer");
@@ -247,15 +250,19 @@ public class RouteTime extends AppCompatActivity {
                     }
                 }
 
+                int duration_a = schedule_a.getInt("duration");
+                duration[i] = duration_a;
 
                 //상단 정보
                 int duration_l = schedule_l.getInt("duration");  //소요시간
                 int numStep_l = schedule_l.getInt("numStep");  //경유역
                 int transferNum_l = transfer_l.getInt("transferNum");  //환승횟수
 
-                if (transferNum_l == 1) {
+                if (transferNum_l == 0) {
+                    numStep_ = numStep_l + 1;
+                } else if (transferNum_l == 1) {
                     numStep_ = numStep_l + 2;
-                } else if (transferNum_l == 2) {
+                }else if (transferNum_l == 2) {
                     numStep_ = numStep_l + 3;
                 } else if (transferNum_l == 3) {
                     numStep_ = numStep_l + 4;
@@ -281,7 +288,9 @@ public class RouteTime extends AppCompatActivity {
                 //환승 횟수
                 transferNum_t = "환승" + transferNum_l + "회";
 
+
             }
+
             createBigView();
 
             //화면에 출력
@@ -298,36 +307,56 @@ public class RouteTime extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    /*long now = System.currentTimeMillis();
-                    Date date = new Date(now);
+                    long now = System.currentTimeMillis();
+                    Date date1 = new Date(now);
                     SimpleDateFormat dateFormat = new SimpleDateFormat("H:m");
-                    String getTime = dateFormat.format(date);*/
+                    String getTime = dateFormat.format(date1);
+
 
                     // 스위치 버튼이 체크되었는지 검사하여 진동 울리기
                     if (isChecked) {
-                        DialogFragment timePicker = new TimePickerFragment();
-                        timePicker.show(getSupportFragmentManager(), "time picker");
 
                             /*if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
                                 Toast.makeText(getApplicationContext(), "목적지에 도착하였습니다.", Toast.LENGTH_SHORT).show();
                                 return;
-                            }
+                            }*/
 
-                            while (!getTime.equals(hourminute_t[numStep_ - 2])) {
+                        String today = null;
+                        Date date = new Date();
+
+                        System.out.println(date); //Thu May 13 13:25:57 KST 2021
+
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("H:m");
+
+                        Calendar cal = Calendar.getInstance();
+
+                        cal.add(Calendar.MINUTE, duration[numStep_-2]);
+                        today = dateFormat1.format(cal.getTime());
+
+                        for(int i=0;i<10;i++){
+                        if(date1.equals(today)){
+                            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(2000); // 1초간 진동
+                        }
+                        }
+
+                        System.out.println(duration[numStep_-2]+"분후 : " + today); //05/13/2021 13:28:57
+
+
+
+                        /*if()
                                 now = System.currentTimeMillis();
                                 date = new Date(now);
                                 dateFormat = new SimpleDateFormat("H:m");
                                 getTime = dateFormat.format(date);
 
                                 Log.d("현재시간", "현재시간: " + getTime);
-                                Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);
+                                Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);*/
 
-                            }
-                            for (int j = 0; j < 3; j++) {
-                                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                                vibrator.vibrate(1000); // 1초간 진동
-                                break;
-                            }*/
+
+
+
+
                     }
                 }
             });
@@ -341,11 +370,11 @@ public class RouteTime extends AppCompatActivity {
 
     }
 
+
     @SuppressLint("ResourceType")
 
 
     private void createBigView() {
-
         for (int i = 0; i < numStep_; i++) {
             TextView textViewNm = new TextView(getApplicationContext()); //출발역, 도착역, 환승역
             TextView textViewTime = new TextView(getApplicationContext()); //열차시간
@@ -420,13 +449,18 @@ public class RouteTime extends AppCompatActivity {
 
 
             } else if (i == numStep_ - 1) { //도착역 처리
+                T.setText("도착");
+                T.setGravity(Gravity.CENTER); // 가운데 정렬
+                T.setTypeface(null, Typeface.BOLD); // 글씨 굵게
+                T.setTextSize(11); //도착표시 텍스트 크기
                 textViewTime.setText(hourminute_t[i]);
-                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
                 textViewTime.setTypeface(null, Typeface.BOLD); //열차시간 글씨 굵게
                 textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
                 textViewNm.setTextSize(23);
+                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
 
                 //텍스트뷰와 레이아웃 연결
+                listView.addView(T);
                 listView.addView(textViewTime);
                 listView.addView(textViewcongestScore);
                 listView.addView(textViewNm);

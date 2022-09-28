@@ -86,7 +86,6 @@ public class RouteCongest extends AppCompatActivity {
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
 
-
         AssetManager assetManager = getAssets();
 
         //assets/ test.json 파일 읽기 위한 InputStream

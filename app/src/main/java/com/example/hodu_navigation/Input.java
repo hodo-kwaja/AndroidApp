@@ -229,6 +229,9 @@ public class Input extends AppCompatActivity {
                 });
 
                 th.start();
+
+                /*Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
+                startActivity(intent);*/
                 //버튼 클릭하면 현재시간, 요일 구함
                 /*Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
                 startActivity(intent);*/
