@@ -1,17 +1,21 @@
 package com.example.hodu_navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
+import android.os.Vibrator;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -19,18 +23,43 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+
+import android.view.View;
+import android.graphics.Typeface;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.kyleduo.switchbutton.SwitchButton;
+
 
 public class RouteCongest extends AppCompatActivity {
 
-    @Override public void onBackPressed() {
+    /*public static final String TAG = "MAIN";
+    private TextView time_text;*/
+
+    //뒤로가기 버튼 누르면 Input 액티비티로 이동
+    @Override
+    public void onBackPressed() {
 
         super.onBackPressed();
 
-        startActivity(new Intent(getApplicationContext(),Input.class));
+        startActivity(new Intent(getApplicationContext(), Input.class));
 
     }
 
@@ -54,8 +83,22 @@ public class RouteCongest extends AppCompatActivity {
     String[] lineId_t = new String[100];
     String[] congestScore_t = new String[100];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        /*time_text = findViewById(R.id.time_text);*//*
+        Button time_btn = findViewById(R.id.time_btn);
+
+        //시간 설정
+        time_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.route_congestion);
@@ -77,8 +120,14 @@ public class RouteCongest extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //////////////////////////////////////////////////////////////////
 
+        /*Button alarm_t=(Button) findViewById(R.id.alarm);
+        alarm_t.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Alarm.class);
+                startActivity(intent);
+            }
+        });*/
         listView = findViewById(R.id.listView);
 
         //xml 아이디 - textview 지정
@@ -86,13 +135,30 @@ public class RouteCongest extends AppCompatActivity {
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
 
-        AssetManager assetManager = getAssets();
+        try{
+
+            FileReader is = new FileReader("/storage/emulated/0/Download/Path7.json");
+
+            BufferedReader reader = new BufferedReader(is);
+
+            StringBuffer buffer = new StringBuffer();
+            String line = reader.readLine();
+            while(line != null) {
+                buffer.append(line + "\n");
+                line = reader.readLine();
+            }
+
+            //읽을 라인이 없을 경우 br은 null을 리턴한다.
+
+
+
+        /*AssetManager assetManager = getAssets();
 
         //assets/ test.json 파일 읽기 위한 InputStream
         try {
-            InputStream is = assetManager.open("test.json"); //환승 1회
+            //InputStream is = assetManager.open("test.json"); //환승 1회
             //InputStream is = assetManager.open("test1.json"); //환승 2회
-            //InputStream is = assetManager.open("test2.json"); //환승 2회
+            InputStream is = assetManager.open("test2.json"); //환승 2회
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
 
@@ -101,15 +167,15 @@ public class RouteCongest extends AppCompatActivity {
             while (line != null) {
                 buffer.append(line + "\n");
                 line = reader.readLine();
-            }
+            }*/
 
 
             String jsonData = buffer.toString();
-
+            Log.d("jsonlog", jsonData);
             //json 데이터가 ShortestPath 일 경우
             JSONObject jsonObject = new JSONObject(jsonData);
 
-            JSONArray jsonArray = jsonObject.getJSONArray("CongestPath");
+            JSONArray jsonArray = jsonObject.getJSONArray("LowCongestPath");
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -135,6 +201,8 @@ public class RouteCongest extends AppCompatActivity {
 
                 //전체역 담는 배열
                 staitonName_tt[i] = stationName_a;
+
+
 
                 //전체역 환승 여부 체크
                 Boolean isTransfer = transfer_a.getBoolean("isTransfer");
@@ -186,9 +254,11 @@ public class RouteCongest extends AppCompatActivity {
                 int numStep_l = schedule_l.getInt("numStep");  //경유역
                 int transferNum_l = transfer_l.getInt("transferNum");  //환승횟수
 
-                if (transferNum_l == 1) {
+                if (transferNum_l == 0) {
+                    numStep_ = numStep_l + 1;
+                } else if (transferNum_l == 1) {
                     numStep_ = numStep_l + 2;
-                } else if (transferNum_l == 2) {
+                }else if (transferNum_l == 2) {
                     numStep_ = numStep_l + 3;
                 } else if (transferNum_l == 3) {
                     numStep_ = numStep_l + 4;
@@ -214,7 +284,9 @@ public class RouteCongest extends AppCompatActivity {
                 //환승 횟수
                 transferNum_t = "환승" + transferNum_l + "회";
 
+
             }
+
             createBigView();
 
             //화면에 출력
@@ -224,22 +296,60 @@ public class RouteCongest extends AppCompatActivity {
             transferNum_textview.setText(transferNum_t);
 
 
+            //////////////////진동 울리기//////////////////
+           /* SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
+            switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    *//*long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("H:m");
+                    String getTime = dateFormat.format(date);*//*
+
+                    // 스위치 버튼이 체크되었는지 검사하여 진동 울리기
+                    if (isChecked) {
+                        DialogFragment timePicker = new TimePickerFragment();
+                        timePicker.show(getSupportFragmentManager(), "time picker");
+
+                            *//*if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
+                                Toast.makeText(getApplicationContext(), "목적지에 도착하였습니다.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            while (!getTime.equals(hourminute_t[numStep_ - 2])) {
+                                now = System.currentTimeMillis();
+                                date = new Date(now);
+                                dateFormat = new SimpleDateFormat("H:m");
+                                getTime = dateFormat.format(date);
+
+                                Log.d("현재시간", "현재시간: " + getTime);
+                                Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);
+
+                            }
+                            for (int j = 0; j < 3; j++) {
+                                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                vibrator.vibrate(1000); // 1초간 진동
+                                break;
+                            }*//*
+                    }
+                }
+            });*/
+
+            ////////////////////////////////////////
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-
-
-
     }
+
     @SuppressLint("ResourceType")
 
 
     private void createBigView() {
-
         for (int i = 0; i < numStep_; i++) {
             TextView textViewNm = new TextView(getApplicationContext()); //출발역, 도착역, 환승역
             TextView textViewTime = new TextView(getApplicationContext()); //열차시간
@@ -314,13 +424,18 @@ public class RouteCongest extends AppCompatActivity {
 
 
             } else if (i == numStep_ - 1) { //도착역 처리
+                T.setText("도착");
+                T.setGravity(Gravity.CENTER); // 가운데 정렬
+                T.setTypeface(null, Typeface.BOLD); // 글씨 굵게
+                T.setTextSize(11); //도착표시 텍스트 크기
                 textViewTime.setText(hourminute_t[i]);
-                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
                 textViewTime.setTypeface(null, Typeface.BOLD); //열차시간 글씨 굵게
                 textViewTime.setTextSize(13);//열차시간 텍스트 크기 지정
                 textViewNm.setTextSize(23);
+                textViewcongestScore.setText(congestScore_t[i]); //혼잡도
 
                 //텍스트뷰와 레이아웃 연결
+                listView.addView(T);
                 listView.addView(textViewTime);
                 listView.addView(textViewcongestScore);
                 listView.addView(textViewNm);
@@ -507,5 +622,7 @@ public class RouteCongest extends AppCompatActivity {
                 textViewlineId.setBackgroundResource(R.drawable.line_101);
             }
         }
+
     }
 }
+

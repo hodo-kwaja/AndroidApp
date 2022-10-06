@@ -173,7 +173,7 @@ public class RouteTransfer extends AppCompatActivity {
 
             String jsonData = buffer.toString();
             Log.d("jsonlog", jsonData);
-            //json 데이터가 ShortestPath 일 경우
+            //json 데이터가 LowTransferPath 일 경우
             JSONObject jsonObject = new JSONObject(jsonData);
 
             JSONArray jsonArray = jsonObject.getJSONArray("LowTransferPath");
