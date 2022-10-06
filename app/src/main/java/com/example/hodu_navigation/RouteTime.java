@@ -311,7 +311,37 @@ public class RouteTime extends AppCompatActivity {
             transferNum_textview.setText(transferNum_t);
 
 
-            //////////////////진동 울리기//////////////////
+            SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
+            switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("H:m");
+                    String getTime = dateFormat.format(date);
+                    // 스위치 버튼이 체크되었는지 검사하여 진동 울리기
+                    if (isChecked){
+                        if(hourminute_t[numStep_ - 2].compareTo(getTime)<0){
+                            return;
+                        }
+                        while(!getTime.equals(hourminute_t[numStep_ - 2])){
+                            now = System.currentTimeMillis();
+                            date = new Date(now);
+                            dateFormat = new SimpleDateFormat("H:m");
+                            getTime = dateFormat.format(date);
+                            Log.d("현재시간", "현재시간: " + getTime);
+                            Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);
+                        }
+                        for(int j=0;j<3;j++) {
+                            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(1000); // 1초간 진동
+                            break;
+                        }
+                    }
+                }
+            });
+
+            /*//////////////////진동 울리기//////////////////
             SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
             switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -319,30 +349,18 @@ public class RouteTime extends AppCompatActivity {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                     long now = System.currentTimeMillis();
-                    Date date1 = new Date(now);
+                    Date date = new Date(now);
                     SimpleDateFormat dateFormat = new SimpleDateFormat("H:m");
-                    String getTime = dateFormat.format(date1);
+                    String getTime = dateFormat.format(date);
 
 
                     // 스위치 버튼이 체크되었는지 검사하여 진동 울리기
                     if (isChecked) {
 
-                            /*if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
+                            *//*if (hourminute_t[numStep_ - 2].compareTo(getTime) < 0) {
                                 Toast.makeText(getApplicationContext(), "목적지에 도착하였습니다.", Toast.LENGTH_SHORT).show();
                                 return;
-                            }*/
-
-                        String today = null;
-                        Date date = new Date();
-
-                        System.out.println(date); //Thu May 13 13:25:57 KST 2021
-
-                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("H:m");
-
-                        Calendar cal = Calendar.getInstance();
-
-                        cal.add(Calendar.MINUTE, duration[numStep_-2]);
-                        today = dateFormat1.format(cal.getTime());
+                            }*//*
 
                         for(int i=0;i<10;i++){
                         if(date1.equals(today)){
@@ -355,14 +373,14 @@ public class RouteTime extends AppCompatActivity {
 
 
 
-                        /*if()
+                        if()
                                 now = System.currentTimeMillis();
                                 date = new Date(now);
                                 dateFormat = new SimpleDateFormat("H:m");
                                 getTime = dateFormat.format(date);
 
                                 Log.d("현재시간", "현재시간: " + getTime);
-                                Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);*/
+                                Log.d("도착시간", "도착시간: " + hourminute_t[numStep_ - 2]);
 
 
 
@@ -370,7 +388,7 @@ public class RouteTime extends AppCompatActivity {
 
                     }
                 }
-            });
+            });*/
 
             ////////////////////////////////////////
         } catch (IOException e) {
@@ -459,10 +477,11 @@ public class RouteTime extends AppCompatActivity {
                 listView.addView(textViewscheduleName);
 
 
-            } else if(i== countt[i]){
+            } /*else if(i== countt[i]){
 
                 ///여기에 추가 ?
-            }
+            }*/
+
             else if (i == numStep_ - 1) { //도착역 처리
                 T.setText("도착");
                 T.setGravity(Gravity.CENTER); // 가운데 정렬
