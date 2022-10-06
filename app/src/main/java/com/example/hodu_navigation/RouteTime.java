@@ -73,6 +73,7 @@ public class RouteTime extends AppCompatActivity {
     int numStep_ = 0;
     int[] countf = new int[100];
     int[] countl = new int[100];
+    int[] countt = new int[100];
     int[] duration = new int[100];
     String duration_t = "";
     String numStep_t = "";
@@ -83,7 +84,7 @@ public class RouteTime extends AppCompatActivity {
     String[] scheduleName_t = new String[100];
     String[] lineId_t = new String[100];
     String[] congestScore_t = new String[100];
-
+    String[] typeName_t = new String[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,6 +229,16 @@ public class RouteTime extends AppCompatActivity {
                 int congestScore = schedule_a.getInt("congestScore");
                 String congestScore_s = Integer.toString(congestScore);
                 congestScore_t[i] = congestScore_s;
+
+                //급행
+                String typeName = schedule_a.getString("typeName");
+                typeName_t[i] = typeName;
+
+                if(typeName == "S"){
+                    countt[i] = i;
+                }
+
+                //Log.d("typename",  typeName_t[i]);
 
                 //환승이 true 인 역의 숫자 저장
                 if (isTransfer == true) {
@@ -448,7 +459,11 @@ public class RouteTime extends AppCompatActivity {
                 listView.addView(textViewscheduleName);
 
 
-            } else if (i == numStep_ - 1) { //도착역 처리
+            } else if(i== countt[i]){
+
+                ///여기에 추가 ?
+            }
+            else if (i == numStep_ - 1) { //도착역 처리
                 T.setText("도착");
                 T.setGravity(Gravity.CENTER); // 가운데 정렬
                 T.setTypeface(null, Typeface.BOLD); // 글씨 굵게
@@ -465,7 +480,8 @@ public class RouteTime extends AppCompatActivity {
                 listView.addView(textViewcongestScore);
                 listView.addView(textViewNm);
 
-            } else { //경유역, 혼잡도
+            }
+            else { //경유역, 혼잡도
                 textViewcongestScore.setText(congestScore_t[i]);//혼잡도
                 textViewcongestScore.setText(congestScore_t[i]); //혼잡도
                 textViewNm.setTextSize(15); //경유역 텍스트 크기
