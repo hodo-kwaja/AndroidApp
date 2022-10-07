@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -11,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -47,7 +53,7 @@ public class Input extends AppCompatActivity {
     static String week; //요일
     String text;
     static int count = 0;
-
+    int h=0, mi=0;
     private long pressedTime;
 
 
@@ -102,40 +108,52 @@ public class Input extends AppCompatActivity {
             }
         });
 
+        Date currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        int e = calendar.get(Calendar.DAY_OF_WEEK);
+
+        //시간
+        Date now = new Date();
+        Date now1 = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("HH");
+        SimpleDateFormat formatter1 = new SimpleDateFormat("mm");
+        formattedH = formatter.format(now);
+        formattedM = formatter1.format(now1);
+
+        //시간 설정할 경우
+        ImageButton button1 = findViewById(R.id.Time);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(Input.this, (view, hourOfDay, minute) -> {
+                        h = hourOfDay;
+                        mi = minute;
+                        formattedH = Integer.toString(h);
+                        formattedM = Integer.toString(mi);
+
+                    }, 02, 00, true);
+                   // timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    timePickerDialog.setMessage("출발 시간을 설정하세요");
+
+                    timePickerDialog.show();
+                }
+
+        });
+        //Toast.makeText(getApplicationContext(), h+":" + mi +"분에 출발시간이 설정되었습니다.", Toast.LENGTH_SHORT).show();
+        if (e == 2 || e == 3 || e == 4 || e == 5 || e == 6)
+            week = "W";
+        else if (e == 7)
+            week = "A";
+        else week = "U";
+
         //검색 버튼 클릭시 액티비티 전환
         ImageButton search_button = (ImageButton) findViewById(R.id.button1);
         search_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-               /* try{
-                    File file = new File("/storage/emulated/0/Download/Path3.json");
-                    if(file.exists()){
-                        file.delete();
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }*/
-
                 /*Log.d("inputcnt", cnt);*/
-                Date currentDate = new Date();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentDate);
-                int e = calendar.get(Calendar.DAY_OF_WEEK);
-
-                //시간
-                Date now = new Date();
-                Date now1 = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("HH");
-                SimpleDateFormat formatter1 = new SimpleDateFormat("mm");
-                formattedH = formatter.format(now);
-                formattedM = formatter1.format(now1);
-
-                if (e == 2 || e == 3 || e == 4 || e == 5 || e == 6)
-                    week = "W";
-                else if (e == 7)
-                    week = "A";
-                else week = "U";
-
                 Log.d("출발역", "출발역: " + departure_text);
                 Log.d("도착역", "도착역: " + arrival_text);
                 Log.d("현재시간", "now: " + formattedH);

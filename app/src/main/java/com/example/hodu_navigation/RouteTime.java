@@ -311,7 +311,7 @@ public class RouteTime extends AppCompatActivity {
             transferNum_textview.setText(transferNum_t);
 
 
-            SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
+           /* SwitchButton switchButton = (SwitchButton) findViewById(R.id.switchButton);
             switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -339,7 +339,7 @@ public class RouteTime extends AppCompatActivity {
                         }
                     }
                 }
-            });
+            });*/
 
            
 
