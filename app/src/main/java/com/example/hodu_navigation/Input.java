@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -55,6 +56,7 @@ public class Input extends AppCompatActivity {
     static int count = 0;
     int h=0, mi=0;
     private long pressedTime;
+    ProgressDialog customProgressDialog; //로딩창 구현 객체
 
 
     @Override
@@ -147,6 +149,12 @@ public class Input extends AppCompatActivity {
         else if (e == 7)
             week = "A";
         else week = "U";
+
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        customProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //로딩창을 투명하게
+        //customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         //검색 버튼 클릭시 액티비티 전환
         ImageButton search_button = (ImageButton) findViewById(R.id.button1);
@@ -247,6 +255,9 @@ public class Input extends AppCompatActivity {
                 });
 
                 th.start();
+
+                customProgressDialog.setMessage("Loading...");
+                customProgressDialog.show(); //로딩 다이얼로그
 
                 /*Intent intent = new Intent(getApplicationContext(), RouteTime.class); //루트타임 페이지 호출
                 startActivity(intent);*/

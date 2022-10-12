@@ -231,12 +231,17 @@ public class RouteTime extends AppCompatActivity {
                 congestScore_t[i] = congestScore_s;
 
                 //급행
+                //Arrays.fill(countt,99); //countt배열 전체 99로 초기화
+
                 String typeName = schedule_a.getString("typeName");
                 typeName_t[i] = typeName;
+                Log.d("typename", typeName_t[i]); //typename확인
 
-                if(typeName == "S"){
-                    countt[i] = i;
+                if(typeName_t[i].equals("S")){
+                    countt[i] = 99;
                 }
+
+                Log.d("countt", "count "+countt[i]);
 
                 //Log.d("typename",  typeName_t[i]);
 
@@ -357,6 +362,8 @@ public class RouteTime extends AppCompatActivity {
 
 
     private void createBigView() {
+        String SS="급행";
+
         for (int i = 0; i < numStep_; i++) {
             TextView textViewNm = new TextView(getApplicationContext()); //출발역, 도착역, 환승역
             TextView textViewTime = new TextView(getApplicationContext()); //열차시간
@@ -370,6 +377,16 @@ public class RouteTime extends AppCompatActivity {
 
 
             if (i == 0) { //출발역 처리
+
+                if(countt[i]==99){ //급행처리
+                    Log.d("카운트","카운트"+countt[i]);
+                    textViewscheduleName.setText(scheduleName_t[i]+" "+SS); //방면
+                    textViewscheduleName.setTextColor(Color.rgb(255, 0, 51));
+                }
+                else{
+                    textViewscheduleName.setText(scheduleName_t[i]); //방면
+                }
+
                 textViewlineId.setText(lineId_t[i]);// 호선
                 textViewlineId.setGravity(Gravity.CENTER);// 호선 가운데 정렬
                 textViewlineId.setTypeface(null, Typeface.BOLD); //호선 글씨 굵게
@@ -411,6 +428,16 @@ public class RouteTime extends AppCompatActivity {
                 listView.addView(textViewTransfer);
 
             } else if (i == countl[i]) { //2번(아래) 환승역 처리
+
+                if(countt[i]==99){ //급행처리
+                    Log.d("카운트","카운트"+countt[i]);
+                    textViewscheduleName.setText(scheduleName_t[i]+" "+SS); //방면
+                    textViewscheduleName.setTextColor(Color.rgb(255, 0, 51));
+                }
+                else{
+                    textViewscheduleName.setText(scheduleName_t[i]); //방면
+                }
+
                 textViewlineId.setText(lineId_t[i]); //호선
                 textViewlineId.setGravity(Gravity.CENTER); //호선 가운데 정렬
                 textViewlineId.setTypeface(null, Typeface.BOLD); // 호선 글씨 굵게
