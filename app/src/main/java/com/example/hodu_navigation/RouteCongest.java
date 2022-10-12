@@ -67,6 +67,7 @@ public class RouteCongest extends AppCompatActivity {
     TextView duration_textview; //소요시간
     TextView numStep_textview;  //경유역
     TextView transferNum_textview;  //환승 횟수
+    TextView info_textview;  //환승 횟수
 
     LinearLayout listView; // 레이아웃 객체 생성
 
@@ -134,6 +135,7 @@ public class RouteCongest extends AppCompatActivity {
         duration_textview = findViewById(R.id.duration);
         numStep_textview = findViewById(R.id.numStep);
         transferNum_textview = findViewById(R.id.transferNum);
+        info_textview = findViewById(R.id.info);
 
         try{
 
@@ -175,10 +177,16 @@ public class RouteCongest extends AppCompatActivity {
             //json 데이터가 ShortestPath 일 경우
             JSONObject jsonObject = new JSONObject(jsonData);
 
+            if(jsonObject.isNull("LowCongestPath")){
+                info_textview.setText("지원안함");
+            }
             JSONArray jsonArray = jsonObject.getJSONArray("LowCongestPath");
 
-            for (int i = 0; i < jsonArray.length(); i++) {
 
+
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                Log.d("infolog","5");
                 //전체 역의 값을 갖고오는 object (전체, all)
                 JSONObject a = jsonArray.getJSONObject(i);
                 //첫번째 역의 값을 갖고오는 object (출발역, first)
