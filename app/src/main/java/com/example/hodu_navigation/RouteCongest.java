@@ -178,7 +178,7 @@ public class RouteCongest extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(jsonData);
 
             if(jsonObject.isNull("LowCongestPath")){
-                info_textview.setText("지원안함");
+                info_textview.setText("혼잡도 경로를 지원하지 않는 경로입니다.");
             }
             JSONArray jsonArray = jsonObject.getJSONArray("LowCongestPath");
 
