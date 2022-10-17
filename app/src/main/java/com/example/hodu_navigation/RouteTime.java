@@ -573,19 +573,19 @@ public class RouteTime extends AppCompatActivity {
             textViewlineId.setTextColor((Color.rgb(255, 255, 255)));
 
             //혼잡도
-            if (congestScore_t[i].equals("3")) {
+            if (congestScore_t[i]!=null&&congestScore_t[i].equals("3")) {
                 textViewcongestScore.setBackgroundColor(Color.RED);
                 textViewcongestScore.setTextColor(Color.RED);
                 textViewcongestScore.setBackgroundResource(R.drawable.round_red);
-            } else if (congestScore_t[i].equals("2")) {
+            } else if (congestScore_t[i]!=null&&congestScore_t[i].equals("2")) {
                 textViewcongestScore.setBackgroundColor(Color.YELLOW);
                 textViewcongestScore.setTextColor(Color.YELLOW);
                 textViewcongestScore.setBackgroundResource(R.drawable.round_yellow);
-            } else if (congestScore_t[i].equals("1")) {
+            } else if (congestScore_t[i]!=null&&congestScore_t[i].equals("1")) {
                 textViewcongestScore.setBackgroundColor(Color.GREEN);
                 textViewcongestScore.setTextColor(Color.GREEN);
                 textViewcongestScore.setBackgroundResource(R.drawable.round_green);
-            } else if (congestScore_t[i].equals("0")) {
+            } else if (congestScore_t[i]!=null&&congestScore_t[i].equals("0")) {
                 textViewcongestScore.setTextColor(Color.rgb(204,204,204));
                 textViewcongestScore.setBackgroundResource(R.drawable.round_white);
             }
@@ -600,13 +600,13 @@ public class RouteTime extends AppCompatActivity {
             } else if (lineId_t[i].equals("3")) {
                 T.setBackgroundResource(R.drawable.line_3);
                 textViewlineId.setBackgroundResource(R.drawable.line_3);
-            } else if (lineId_t[i].equals("4")) {
+            } else if (congestScore_t[i]!=null&&lineId_t[i].equals("4")) {
                 T.setBackgroundResource(R.drawable.line_4);
                 textViewlineId.setBackgroundResource(R.drawable.line_4);
             } else if (lineId_t[i].equals("5")) {
                 T.setBackgroundResource(R.drawable.line_5);
                 textViewlineId.setBackgroundResource(R.drawable.line_5);
-            } else if (lineId_t[i].equals("6")) {
+            } else if (congestScore_t[i]!=null&&lineId_t[i].equals("6")) {
                 T.setBackgroundResource(R.drawable.line_6);
                 textViewlineId.setBackgroundResource(R.drawable.line_6);
             } else if (lineId_t[i].equals("7")) {
