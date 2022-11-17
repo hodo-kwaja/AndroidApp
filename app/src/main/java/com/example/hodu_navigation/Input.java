@@ -135,6 +135,11 @@ public class Input extends AppCompatActivity {
                         formattedH = Integer.toString(h);
                         formattedM = Integer.toString(mi);
 
+                        if(formattedH.equals("1")||formattedH.equals("2")||formattedH.equals("3")||formattedH.equals("4")){
+                            formattedH="5";
+                            formattedM="30";
+                        }
+
                     }, 02, 00, true);
                    // timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     timePickerDialog.setMessage("출발 시간을 설정하세요");
@@ -143,7 +148,8 @@ public class Input extends AppCompatActivity {
                 }
 
         });
-        //Toast.makeText(getApplicationContext(), h+":" + mi +"분에 출발시간이 설정되었습니다.", Toast.LENGTH_SHORT).show();
+
+
         if (e == 2 || e == 3 || e == 4 || e == 5 || e == 6)
             week = "W";
         else if (e == 7)
